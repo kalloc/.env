@@ -54,7 +54,7 @@ set noswapfile
 set nobackup
 set nowritebackup
 
-set wildignore+=__pycache__,venv,.git,.hg,.svn,*.o,*.aux,*.png,*.jpg,*.pdf
+set wildignore+=.build,__pycache__,venv,.git,.hg,.svn,*.o,*.aux,*.png,*.jpg,*.pdf
 set nofoldenable
 syntax on
 
