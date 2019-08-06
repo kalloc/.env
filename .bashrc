@@ -120,7 +120,7 @@ function apt_key_fetch() {
 
 function cmake_compile_commands() {
     cmake -H. -B.build -DCMAKE_BUILD_TYPE=Debug -DCMAKE_EXPORT_COMPILE_COMMANDS=YES
-    ln -s .build/compile_commands.json .
+    ln -sf .build/compile_commands.json .
 }
 
 if [ -f ~/.bash_aliases ]; then
