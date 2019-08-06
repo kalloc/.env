@@ -100,7 +100,10 @@ fi
 export PATH="$HOME/.cargo/bin:$PATH"
 
 # OCaml
-test -r $HOME/.opam/opam-init/init.sh && . $HOME/.opam/opam-init/init.sh > /dev/null 2> /dev/null || true
+if [[ -f $HOME/.opam/opam-init/init.sh ]];then 
+    . $HOME/.opam/opam-init/init.sh > /dev/null 2> /dev/null
+    eval $(opam env) 
+fi
 
 
 # Nix
