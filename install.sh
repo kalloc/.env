@@ -55,9 +55,10 @@ sudo -H -u y bash <<EOF
 echo install nix
 . \$HOME/.nix-profile/etc/profile.d/nix.sh
 nix-env -i git neovim mosh exo ripgrep tmux \
-	python3.7 python3.7-pip python3.7-pip-tools python3.7-setuptools python3.7-pynvim \
-	nodejs \
-	 -j8
+    ccls \
+    python3.7 python3.7-pip python3.7-pip-tools python3.7-setuptools python3.7-pynvim \
+    nodejs \
+     -j8
 
 if [[ ! -e \$HOME/.dotenv ]];then
 	git clone https://github.com/kalloc/dotenv \$HOME/.dotenv
