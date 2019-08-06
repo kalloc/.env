@@ -266,7 +266,7 @@ map <A-LEFT> :tabprevious<cr>
 "             Appearance
 "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-set termguicolors
+set notermguicolors
 set background=dark
 colorscheme gruvbox
 let g:gruvbox_italic=1
