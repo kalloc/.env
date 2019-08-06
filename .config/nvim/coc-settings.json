@@ -1,0 +1,115 @@
+{
+    "diagnostic.enable": true,
+    "codeLens.enable":  true,
+    "diagnostic.displayByAle": true,
+    "suggest.autoTrigger": "always",
+	"suggest.acceptSuggestionOnCommitCharacter": true,
+	"suggest.echodocSupport": false,
+	"suggest.maxCompleteItemCount": 100,
+	"suggest.enablePreview": true,
+    "suggest.floatEnable": true,
+	"signature.enable": true,
+	"signature.target": "float",
+    "python.jediEnabled": false,
+    "coc.preferences.rootPatterns": [
+        ".vim",
+        ".git",
+        ".hg",
+        ".root",
+        ".projections.json"
+    ],
+    "python.autoComplete.showAdvancedMembers": false,
+    "python.linting.enabled": true,
+    "python.analysis.diagnosticEnabled": true,
+    "python.linting.pylintEnabled": true,
+    "python.linting.mypyEnabled": true,
+    "python.linting.pylintArgs": [
+        "--disable=W1401,C0111",
+        "-E",
+        "--load-plugins=pylint_django",
+        "--load-plugins=pylint_django.checkers.db_performance"
+    ],
+    "python.linting.flake8Enabled": true,
+    "python.linting.flake8Args": [
+        "--append-config='select=B,E,F,W,I,C'"
+    ],
+    "python.formatting.provider": "yapf",
+    "python.formatting.yapfArgs": [
+        "--style='{based_on_style: pep8, COLUMN_LIMIT: 100}'"
+    ],
+    "python.sortImports.path": "~/.pyenv/shims/isort",
+    "languageserver": {
+         "ocaml": {
+            "command": "ocaml-language-server",
+            "args": ["--stdio"],
+            "filetypes": ["ocaml", "reason"],
+            "rootPatterns": [".git/"]
+        },
+        "lua": {
+            "command": "lua-lsp",
+            "filetypes": ["lua"]
+        },
+        "dockerfile": {
+            "command": "docker-langserver",
+            "filetypes": ["Dockerfile"],
+            "args": ["--stdio"]
+        },
+        "elixir": {
+            "command": "elixir-ls",
+            "filetypes": ["elixir", "eelixir"]
+        },
+         "golang": {
+            "command": "gopls",
+            "args": [],
+            "rootPatterns": [
+                "go.mod",
+                ".vim/",
+                ".git/",
+                ".hg/"
+            ],
+            "filetypes": [
+                "go"
+            ]
+        },
+        "bingo": {
+            "command": "bingo",
+            "args": [
+                "--diagnostics-style=instant",
+                "--format-style=goimports"
+            ],
+            "rootPatterns": [
+                "go.mod",
+                ".git/"
+            ],
+            "filetypes": [
+                "ago"
+            ]
+        },
+        "ccls": {
+            "command": "ccls",
+            "args": ["-v=1", "--log-file=/tmp/ccls.log"],
+            "disableDiagnostics": false,
+            "filetypes": ["c", "cpp", "objc", "objcpp"],
+            "rootPatterns": [
+                ".ccls",
+                "compile_commands.json",
+                ".vim/",
+                ".git/",
+                ".hg/"
+            ],
+            "initializationOptions": {
+                "completion": {
+                    "detailedLabel": true
+                },
+                "highlight": { "lsRanges" : true },
+                "cacheDirectory": "/tmp/ccls",
+                "clang": {
+                },
+            }
+        }
+    },
+    "git.enableGutters": true,
+    "git.addGlameToVirtualText": false,
+    "git.addGlameToBufferVar": false,
+    "git.realtimeGutters": true
+}

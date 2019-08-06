@@ -1,0 +1,38 @@
+
+[alias]
+    up = !(git add . && git stash && git pull --rebase >&2) | grep -v \"No local changes to save\" && git stash pop
+    ci = commit
+    st = status
+    co = checkout
+
+[color]
+	diff = auto
+	status = auto
+	branch = auto
+
+[core]
+	quotepath = false
+	editor = vim
+
+[push]
+	default = matching
+
+
+[filter "media"]
+	clean = git-media-clean %f
+	smudge = git-media-smudge %f
+
+[branch]
+	autosetuprebase = always
+
+[pull]
+	rebase = true
+
+[merge]
+	ff = false
+
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true

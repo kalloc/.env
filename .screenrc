@@ -1,0 +1,3 @@
+
+caption always "%{= 45}%{+b w}Screen: %n | %h %=%t %c"
+hardstatus alwayslastline "%-Lw%{= BW}%50>%n%f* %t%{-}%+Lw%<"
