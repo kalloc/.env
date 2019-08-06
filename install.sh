@@ -1,5 +1,5 @@
 #!/bin/bash
-#sh <(wget --no-check-certificate -q -O - https://raw.github.com/kalloc/dotenv/master/install.sh)
+#bash <(wget --no-check-certificate -q -O - https://raw.github.com/kalloc/dotenv/master/install.sh)
 
 set -e
 
@@ -51,7 +51,8 @@ if [[ ! -e ${userroot}/.nix-profile ]];then
 	sudo -H -u y bash -c "bash <(curl https://nixos.org/nix/install)"
 fi
 
-sudo -H -u y bash -x <<EOF
+sudo -H -u y bash <<EOF
+echo install nix
 . \$HOME/.nix-profile/etc/profile.d/nix.sh
 nix-env -i git neovim mosh exo ripgrep tmux \
 	python3.7 python3.7-pip python3.7-pip-tools python3.7-setuptools python3.7-pynvim \
@@ -82,6 +83,7 @@ EOF
 
 test $USE_NODEJS && sudo -H -u y bash <<EOF
 if [[ ! -r \$HOME/.nvm ]]; then 
+echo install nvm
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.34.0/install.sh | bash;
 export NVM_DIR="\$HOME/.nvm"
 [ -s "\$NVM_DIR/nvm.sh" ] && \. "\$NVM_DIR/nvm.sh"  # This loads nvm
@@ -92,8 +94,9 @@ fi
 EOF
 
 
-test $USE_PYTHON && sudo -H -u y bash -x <<EOF
+test $USE_PYTHON && sudo -H -u y bash <<EOF
 if [[ ! -r \$HOME/.pyenv ]]; then 
+echo install pyenv
 curl -L https://github.com/pyenv/pyenv-installer/raw/master/bin/pyenv-installer | bash
 export PATH="\$HOME/.pyenv/bin:\$PATH"
 eval "\$(pyenv init -)"
@@ -103,8 +106,9 @@ pyenv global 3.7.4
 fi
 EOF
 
-test $USE_GO && sudo -H -u y bash -x <<EOF
+test $USE_GO && sudo -H -u y bash <<EOF
 if [[ ! -r \$HOME/.gvm ]]; then 
+echo install gvm
 bash < <(curl -s -S -L https://raw.githubusercontent.com/moovweb/gvm/master/binscripts/gvm-installer)
 . /home/y/.gvm/scripts/gvm
 gvm install go1.12.7
@@ -112,8 +116,9 @@ gvm use go1.12.7 --default
 fi
 EOF
 
-test $USE_OCAML && sudo -H -u y bash -x <<EOF
+test $USE_OCAML && sudo -H -u y bash <<EOF
 if [[ ! -r \$HOME/.opam ]]; then 
+echo install opam
 echo "check_certificate = off" > ~/.wgetrc
 sh <(curl -sL https://raw.githubusercontent.com/ocaml/opam/master/shell/install.sh)
 rm -rf ~/.wgetrc
@@ -121,8 +126,9 @@ opam init
 fi
 EOF
 
-test $USE_ELIXIR && sudo -H -u y bash -x <<EOF
+test $USE_ELIXIR && sudo -H -u y bash <<EOF
 if [[ ! -r \$HOME/.exenv ]]; then 
+echo install elixir
 git clone git://github.com/mururu/exenv.git ~/.exenv
 export PATH="\$HOME/.exenv/bin:\$PATH"
 eval "\$(exenv init -)"
@@ -134,13 +140,17 @@ exenv global 1.9.1
 fi
 EOF
 
-test $USE_RUST && sudo -H -u y bash -x <<EOF
+test $USE_RUST && sudo -H -u y bash <<EOF
 if [[ ! -r \$HOME/.cargo ]]; then 
+echo install cargo
 curl https://sh.rustup.rs -sSf | sh -s -- --no-modify-path -y
 fi
 EOF
 
-sudo -H -u y bash -x <<EOF
+sudo -H -u y bash <<EOF
+
+echo install nvim plug
+
 . \$HOME/.nix-profile/etc/profile.d/nix.sh
 
 curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs \
