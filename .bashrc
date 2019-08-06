@@ -101,19 +101,20 @@ export HISTCONTROL=ignoreboth
 
 
 # Pyenv
+export PATH="$HOME/.pyenv/bin:$PATH"
 if [[ $(which pyenv) != "" ]];then 
-eval "$(pyenv init -)"
-eval "$(pyenv virtualenv-init -)"
+    eval "$(pyenv init -)"
+    eval "$(pyenv virtualenv-init -)"
 fi
 
 # Erlang
-if [[ $(which pyenv) != "" ]];then 
 export PATH="$HOME/.exenv/bin:$PATH"
-eval "$(exenv init -)"
+if [[ $(which exenv) != "" ]];then 
+    eval "$(exenv init -)"
 fi
 
 # Go
-[[ -f ~/.gvm/scripts/gvm ]] && source /Users/y/.gvm/scripts/gvm
+[[ -f ~/.gvm/scripts/gvm ]] && source $HOME/.gvm/scripts/gvm
 
 # Rust
 export PATH="$HOME/.cargo/bin:$PATH"
