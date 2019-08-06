@@ -40,10 +40,6 @@ xterm*|rxvt*)
     ;;
 esac
 
-
-use_color=false
-safe_term=${TERM//[^[:alnum:]]/.}       # sanitize TERM
-
 function parse_git_dirty {
   [[ $(git status 2> /dev/null | tail -n1) != "nothing to commit (working tree clean)" ]] && echo "*"
 }
@@ -68,34 +64,17 @@ else
     }
 fi
 
-match_lhs=""
-[[ -f ~/.dir_colors   ]] && match_lhs="${match_lhs}$(<~/.dir_colors)"
-[[ -f /etc/DIR_COLORS ]] && match_lhs="${match_lhs}$(</etc/DIR_COLORS)"
-[[ -z ${match_lhs}    ]] \
-        && match_lhs=$(dircolors --print-database)
-    [[ $'\n'${match_lhs} == *$'\n'"TERM "${safe_term}* ]] && use_color=true
-
-if ${use_color} ; then
-       # Enable colors for ls, etc.  Prefer ~/.dir_colors #64489
-                if [[ -f ~/.dir_colors ]] ; then
-                        eval $(dircolors -b ~/.dir_colors)
-                elif [[ -f /etc/DIR_COLORS ]] ; then
-                        eval $(dircolors -b /etc/DIR_COLORS)
-                fi
-
-        if [[ ${EUID} == 0 ]] ; then
-                PS1='\[\033[01;31m\]\u@\h\[\033[01;34m\] \w$(parse_git_branch) \$\[\033[00m\] '
-        else
-                PS1='\[\033[01;32m\]\u@\h\[\033[01;34m\] \w$(parse_git_branch) \$\[\033[00m\] '
+# Enable colors for ls, etc.  Prefer ~/.dir_colors #64489
+        if [[ -f ~/.dir_colors ]] ; then
+                eval $(dircolors -b ~/.dir_colors)
+        elif [[ -f /etc/DIR_COLORS ]] ; then
+                eval $(dircolors -b /etc/DIR_COLORS)
         fi
 
+if [[ ${EUID} == 0 ]] ; then
+        PS1='\[\033[01;31m\]\u@\h\[\033[01;34m\] \w$(parse_git_branch) \$\[\033[00m\] '
 else
-        if [[ ${EUID} == 0 ]] ; then
-                # show root@ when we don't have colors
-                PS1='\u@\h \W \$ '
-        else
-                PS1='\u@\h \w \$ '
-        fi
+        PS1='\[\033[01;32m\]\u@\h\[\033[01;34m\] \w$(parse_git_branch) \$\[\033[00m\] '
 fi
 
 export HISTCONTROL=ignoreboth
@@ -120,7 +99,7 @@ fi
 # Rust
 export PATH="$HOME/.cargo/bin:$PATH"
 
-# Ocaml
+# OCaml
 test -r $HOME/.opam/opam-init/init.sh && . $HOME/.opam/opam-init/init.sh > /dev/null 2> /dev/null || true
 
 
