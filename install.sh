@@ -55,7 +55,7 @@ sudo -H -u y bash <<EOF
 echo install nix
 . \$HOME/.nix-profile/etc/profile.d/nix.sh
 nix-env -i git neovim mosh exo ripgrep tmux \
-    ccls \
+    ccls jq httpie fd bat asciinema \
     python3.7 python3.7-pip python3.7-pip-tools python3.7-setuptools python3.7-pynvim \
     nodejs \
      -j8
