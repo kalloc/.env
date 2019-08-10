@@ -1,5 +1,5 @@
 #!/bin/bash
-#bash <(wget --no-check-certificate -q -O - https://raw.github.com/kalloc/dotenv/master/install.sh)
+#bash <(wget --no-check-certificate -q -O - https://raw.github.com/kalloc/.env/master/install.sh)
 
 set -e
 
