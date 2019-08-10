@@ -60,26 +60,26 @@ nix-env -i git neovim mosh exo ripgrep tmux \
     nodejs \
      -j8
 
-if [[ ! -e \$HOME/.dotenv ]];then
-	git clone https://github.com/kalloc/dotenv \$HOME/.dotenv
+if [[ ! -e \$HOME/.env ]];then
+	git clone https://github.com/kalloc/.env \$HOME/.env
 else
-	(cd \$HOME/.dotenv && git checkout . && git pull)
+	(cd \$HOME/.env && git checkout . && git pull)
 fi
 mkdir -p \$HOME/.ssh; 
 chmod 700 \$HOME/.ssh;
 mkdir -p \$HOME/.config/coc/extensions;
 mkdir -p \$HOME/.config/nvim;
-cp \$HOME/.dotenv/authorized_keys \$HOME/.ssh/ && chmod 600 \$HOME/.ssh/authorized_keys
-ln -sf \$HOME/.dotenv/.bashrc \$HOME/
-ln -sf \$HOME/.dotenv/.bash_export \$HOME/
-ln -sf \$HOME/.dotenv/.profile \$HOME/
-ln -sf \$HOME/.dotenv/.screenrc \$HOME/
-ln -sf \$HOME/.dotenv/.config/coc/extensions/package.json \$HOME/.config/coc/extensions/
-ln -sf \$HOME/.dotenv/.config/nvim/coc-settings.json \$HOME/.config/nvim/
-ln -sf \$HOME/.dotenv/.config/nvim/init.vim \$HOME/.config/nvim/
-ln -sf \$HOME/.dotenv/.tmux.conf \$HOME/
-ln -sf \$HOME/.dotenv/.bashrc \$HOME/
-ln -sf \$HOME/.dotenv/.bash_aliases \$HOME/
+cp \$HOME/.env/authorized_keys \$HOME/.ssh/ && chmod 600 \$HOME/.ssh/authorized_keys
+ln -sf \$HOME/.env/.bashrc \$HOME/
+ln -sf \$HOME/.env/.bash_export \$HOME/
+ln -sf \$HOME/.env/.profile \$HOME/
+ln -sf \$HOME/.env/.screenrc \$HOME/
+ln -sf \$HOME/.env/.config/coc/extensions/package.json \$HOME/.config/coc/extensions/
+ln -sf \$HOME/.env/.config/nvim/coc-settings.json \$HOME/.config/nvim/
+ln -sf \$HOME/.env/.config/nvim/init.vim \$HOME/.config/nvim/
+ln -sf \$HOME/.env/.tmux.conf \$HOME/
+ln -sf \$HOME/.env/.bashrc \$HOME/
+ln -sf \$HOME/.env/.bash_aliases \$HOME/
 EOF
 
 test $USE_NODEJS && sudo -H -u y bash <<EOF
