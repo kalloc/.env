@@ -35,6 +35,7 @@ endif
 "               General
 "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
+
 let mapleader = ","
 set number
 set relativenumber
@@ -209,6 +210,9 @@ set hlsearch
 set ignorecase
 set smartcase
 
+nnoremap <C-[> <C-o>
+nnoremap <C-]> <C-i>
+
 if has('nvim')
     set inccommand=split
 endif
@@ -229,9 +233,6 @@ function! GotoJump()
 endfunction
 nmap <Leader>j :call GotoJump()<CR>
 
-
-nnoremap <C-[> <C-o>
-nnoremap <C-]> <C-i>
 "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 "              Spelling
@@ -617,7 +618,7 @@ let g:airline_powerline_fonts=1
 " let g:airline_section_b = '%{get(g:,"coc_git_status", "")}%{get(b:, "coc_git_status", "")}'
 "let g:airline_section_b = "%{get(g:,'coc_git_status','')}%{get(b:,'coc_git_status','')}%{get(b:,'coc_git_blame','')}%{coc#status()}"
 " let g:airline_section_b = "%{get(g:,'coc_git_status','')}%{get(b:,'coc_git_status','')}%{coc#status()}"
-let g:airline_section_b = "%{get(g:,'coc_git_status','')}%{get(b:,'coc_git_status','')}%{coc#status()}"
+let g:airline_section_b = "%{get(g:,'coc_git_status','')}%{get(b:,'coc_git_status','')} %{coc#status()}"
 
 if !exists('g:airline_symbols')
     let g:airline_symbols={}
@@ -896,9 +897,7 @@ let g:rust_clip_command = 'pbcopy'
 "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 " let g:rooter_silent_chdir=1
-"let g:rooter_patterns=['.git/', '.svn/', 'package.json']
 let g:rooter_patterns=['.vim/', '.root', '.git/', '.svn/', 'go.mod', 'package.json', 'Cargo.toml', 'requirements.txt']
-
 
 "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 "             File specific
