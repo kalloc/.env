@@ -79,6 +79,8 @@ fi
 
 export HISTCONTROL=ignoreboth
 
+# Nix
+test -r $HOME/.nix-profile/ && . $HOME/.nix-profile/etc/profile.d/nix.sh
 
 # Pyenv
 export PATH="$HOME/.pyenv/bin:$PATH"
@@ -86,6 +88,9 @@ if [[ $(which pyenv) != "" ]];then
     eval "$(pyenv init -)"
     eval "$(pyenv virtualenv-init -)"
 fi
+
+# NVM
+[[ -f ~/.nvm/nvm.sh ]] && source $HOME/.nvm/nvm.sh
 
 # Erlang
 export PATH="$HOME/.exenv/bin:$PATH"
@@ -104,10 +109,6 @@ if [[ -f $HOME/.opam/opam-init/init.sh ]];then
     . $HOME/.opam/opam-init/init.sh > /dev/null 2> /dev/null
     eval $(opam env) 
 fi
-
-
-# Nix
-test -r $HOME/.nix-profile/ && . $HOME/.nix-profile/etc/profile.d/nix.sh
 
 function apt_key_fetch() {
    if [[ $1 !=  '' ]];then
