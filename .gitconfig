@@ -1,3 +1,6 @@
+[user]
+	name = Nikita Kuznetsov
+	email = me@daedalus.ru
 
 [alias]
     up = !(git add . && git stash && git pull --rebase >&2) | grep -v \"No local changes to save\" && git stash pop
