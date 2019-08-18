@@ -88,6 +88,7 @@ if [[ $(which pyenv) != "" ]];then
     eval "$(pyenv init -)"
     eval "$(pyenv virtualenv-init -)"
 fi
+PYTHON_EXEC=$(which python)
 
 # NVM
 [[ -f ~/.nvm/nvm.sh ]] && source $HOME/.nvm/nvm.sh
@@ -119,8 +120,14 @@ function apt_key_fetch() {
    fi
 }
 
+if [[ $PYTHON_EXEC != "" ]];then
+	cmake_OPT_PYTHON=" -DPYTHON_EXECUTABLE=${PYTHON_EXEC}"
+else
+	cmake_OPT_PYTHON=" "
+fi
+
 function cmake_compile_commands() {
-    cmake -H. -B.build -DCMAKE_BUILD_TYPE=Debug -DCMAKE_EXPORT_COMPILE_COMMANDS=YES
+    cmake -H. -B.build -DCMAKE_BUILD_TYPE=Debug -DCMAKE_EXPORT_COMPILE_COMMANDS=YES ${cmake_OPT_PYTHON}
     ln -sf .build/compile_commands.json .
 }
 
