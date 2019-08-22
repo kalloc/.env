@@ -3,14 +3,13 @@
     "codeLens.enable":  true,
     "diagnostic.displayByAle": true,
     "suggest.autoTrigger": "always",
-	"suggest.acceptSuggestionOnCommitCharacter": true,
-	"suggest.echodocSupport": false,
-	"suggest.maxCompleteItemCount": 100,
-	"suggest.enablePreview": true,
+    "suggest.acceptSuggestionOnCommitCharacter": true,
+    "suggest.echodocSupport": false,
+    "suggest.maxCompleteItemCount": 100,
+    "suggest.enablePreview": true,
     "suggest.floatEnable": true,
-	"signature.enable": true,
-	"signature.target": "float",
-    "python.jediEnabled": false,
+    "signature.enable": true,
+    "signature.target": "float",
     "coc.preferences.rootPatterns": [
         ".vim",
         ".git",
@@ -18,6 +17,7 @@
         ".root",
         ".projections.json"
     ],
+    "python.jediEnabled": false,
     "python.autoComplete.showAdvancedMembers": false,
     "python.linting.enabled": true,
     "python.analysis.diagnosticEnabled": true,
@@ -37,9 +37,9 @@
     "python.formatting.yapfArgs": [
         "--style='{based_on_style: pep8, COLUMN_LIMIT: 100}'"
     ],
-    "python.sortImports.path": "~/.pyenv/shims/isort",
+    "python.sortImports.path": "isort",
     "languageserver": {
-         "ocaml": {
+        "ocaml": {
             "command": "ocaml-language-server",
             "args": ["--stdio"],
             "filetypes": ["ocaml", "reason"],
@@ -58,7 +58,7 @@
             "command": "elixir-ls",
             "filetypes": ["elixir", "eelixir"]
         },
-         "golang": {
+        "golang": {
             "command": "gopls",
             "args": [],
             "rootPatterns": [
@@ -102,9 +102,7 @@
                     "detailedLabel": true
                 },
                 "highlight": { "lsRanges" : true },
-                "cacheDirectory": "/tmp/ccls",
-                "clang": {
-                },
+                "cacheDirectory": "/tmp/ccls"
             }
         }
     },
