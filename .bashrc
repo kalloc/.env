@@ -91,7 +91,10 @@ fi
 PYTHON_EXEC=$(which python)
 
 # NVM
-[[ -f ~/.nvm/nvm.sh ]] && source $HOME/.nvm/nvm.sh
+if [[ -f ~/.nvm/nvm.sh ]]; then
+    source $HOME/.nvm/nvm.sh
+    nvm use default
+fi
 
 # Erlang
 export PATH="$HOME/.exenv/bin:$PATH"
