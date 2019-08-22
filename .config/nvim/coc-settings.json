@@ -58,19 +58,6 @@
             "command": "elixir-ls",
             "filetypes": ["elixir", "eelixir"]
         },
-        "golang": {
-            "command": "gopls",
-            "args": [],
-            "rootPatterns": [
-                "go.mod",
-                ".vim/",
-                ".git/",
-                ".hg/"
-            ],
-            "filetypes": [
-                "go"
-            ]
-        },
         "bingo": {
             "command": "bingo",
             "args": [
