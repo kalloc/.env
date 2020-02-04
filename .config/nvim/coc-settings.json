@@ -1,15 +1,37 @@
 {
-    "diagnostic.enable": true,
     "codeLens.enable":  true,
-    "diagnostic.displayByAle": true,
+    "diagnostic.enable": true,
+    "diagnostic.messageTarget":"float",
+    "diagnostic.virtualText": true,
+    "diagnostic.refreshOnInsertMode": false,
+    "diagnostic.virtualTextPrefix": "‣ ",
+    "diagnostic.displayByAle": false,
+    "diagnostic.checkCurrentLine": true,
+    "diagnostic.errorSign": "✖",
+    "diagnostic.warningSign": "⚠",
+    "diagnostic.infoSign": "ℹ",
+    "diagnostic.hintSign": "ℹ",
+    "refactor.afterContext": 2,
+    "refactor.beforeContext": 2,
     "suggest.autoTrigger": "always",
     "suggest.acceptSuggestionOnCommitCharacter": true,
     "suggest.echodocSupport": false,
     "suggest.maxCompleteItemCount": 100,
     "suggest.enablePreview": true,
     "suggest.floatEnable": true,
+    "suggest.localityBonus": true,
     "signature.enable": true,
     "signature.target": "float",
+    "project.rootPatterns": [
+        ".env",
+        "pipreq.txt",
+        "manage.py",
+        "venv",
+        "requirements.txt",
+        "package.json",
+        "Cargo.toml",
+        ".git"
+    ],
     "coc.preferences.rootPatterns": [
         ".vim",
         ".git",
@@ -20,24 +42,39 @@
     "python.jediEnabled": false,
     "python.autoComplete.showAdvancedMembers": false,
     "python.linting.enabled": true,
+    "python.analysis.downloadChannel": "stable",
     "python.analysis.diagnosticEnabled": true,
+    "python.workspaceSymbols.rebuildOnStart": false,
     "python.linting.pylintEnabled": true,
     "python.linting.mypyEnabled": true,
+    "python.analysis.cachingLevel": "Library",
+
     "python.linting.pylintArgs": [
         "--disable=W1401,C0111",
-        "-E",
-        "--load-plugins=pylint_django",
-        "--load-plugins=pylint_django.checkers.db_performance"
+        "-E"
     ],
     "python.linting.flake8Enabled": true,
     "python.linting.flake8Args": [
-        "--append-config='select=B,E,F,W,I,C'"
+        "--append-config='select=B,E,F,W,I,C'",
+        "--max-line-length=99"
     ],
     "python.formatting.provider": "yapf",
     "python.formatting.yapfArgs": [
         "--style='{based_on_style: pep8, COLUMN_LIMIT: 100}'"
     ],
     "python.sortImports.path": "isort",
+    "importCost.typescriptExtensions": [
+        "\\.tsx?$"
+    ],
+    "importCost.javascriptExtensions": [
+        "\\.jsx?$"
+    ],
+    "importCost.bundleSizeDecoration": "both",
+    "importCost.showCalculatingDecoration": true,
+    "importCost.debug": false,
+    "prettier.requireConfig": true,
+    "eslint.autoFixOnSave": true,
+    "tsserver.enableJavascript": true,
     "languageserver": {
         "ocaml": {
             "command": "ocaml-language-server",
@@ -94,7 +131,14 @@
         }
     },
     "git.enableGutters": true,
-    "git.addGlameToVirtualText": false,
-    "git.addGlameToBufferVar": false,
-    "git.realtimeGutters": true
+    "git.realtimeGutters": true,
+    "git.addGBlameToVirtualText": false,
+    "git.addGBlameToBufferVar": false,
+
+    "git.changedSign.hlGroup": "GruvboxAquaSign",
+    "git.addedSign.hlGroup": "GruvboxGreenSign",
+    "git.removedSign.hlGroup": "GruvboxRedSign",
+    "git.topRemovedSign.hlGroup": "GruvboxRedSign",
+    "git.changeRemovedSign.hlGroup": "GruvboxPurpleSign",
+    "coc.preferences.extensionUpdateCheck": "daily"
 }

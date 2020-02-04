@@ -11,7 +11,7 @@ set nocompatible
 if system('uname -s') == "Darwin\n"
     "OSX
     let g:os="osx"
-    set clipboard=unnamedplus
+	set clipboard=unnamed,unnamedplus
 else
     "Linux
     let g:os="linux"
@@ -95,10 +95,11 @@ let g:tex_flavor="latex"
 "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 "               Plugins
 "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+filetype off
 
 call plug#begin('~/.vim/plugged')
 
-" Interface.
+" " Interface.
 Plug 'airblade/vim-gitgutter'
 Plug 'vim-airline/vim-airline'
 Plug 'morhetz/gruvbox'
@@ -109,8 +110,8 @@ Plug 'machakann/vim-highlightedyank'
 " Text.
 Plug 'numirias/semshi', {'do': ':UpdateRemotePlugins'}
 
-" Plug 'arakashic/chromatica.nvim', {'for': ['c', 'cpp'], 'do': ':UpdateRemotePlugins'}
-Plug 'ciaranm/detectindent'
+Plug 'arakashic/chromatica.nvim', {'for': ['c', 'cpp'], 'do': ':UpdateRemotePlugins'}
+" Plug 'ciaranm/detectindent'
 Plug 'tpope/vim-markdown', { 'for': ['markdown'] }
 Plug 'godlygeek/tabular', { 'for': ['tex', 'markdown'] }
 "Plug 'lyokha/vim-xkbswitch'
@@ -125,13 +126,9 @@ Plug 'justinmk/vim-sneak'
 "Plug 'vim-scripts/dbext.vim'
 Plug 'tpope/vim-fugitive'
 Plug 'rizzatti/dash.vim'
-" Plug 'airblade/vim-rooter'
-"Plug 'metakirby5/codi.vim'
-Plug 'w0rp/ale'
-"Plug 'autozimu/LanguageClient-neovim', {
-"\   'branch': 'next',
-"\   'do': 'bash install.sh',
-"\}
+Plug 'airblade/vim-rooter'
+" Plug 'metakirby5/codi.vim'
+" Plug 'w0rp/ale'
 Plug 'Shougo/echodoc.vim'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
@@ -140,8 +137,7 @@ Plug 'ryanoasis/vim-devicons'
 Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
 Plug 'vwxyutarooo/nerdtree-devicons-syntax'
 Plug 'will133/vim-dirdiff'
-
-Plug 'neoclide/coc.nvim', {'tag': '*', 'branch': 'release'}
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
 Plug 'jackguo380/vim-lsp-cxx-highlight'
 
@@ -154,12 +150,14 @@ Plug 'jackguo380/vim-lsp-cxx-highlight'
 " endif
 
 " Languages.
+Plug 'neovimhaskell/haskell-vim'
+Plug 'alx741/vim-hindent' " Optional
 Plug 'dbgx/lldb.nvim'
 Plug 'lervag/vimtex'
 Plug 'cespare/vim-toml'
 Plug 'pangloss/vim-javascript'
 Plug 'mxw/vim-jsx'
-Plug 'peitalin/vim-jsx-typescript'
+" Plug 'peitalin/vim-jsx-typescript'
 Plug 'leafgarland/typescript-vim'
 Plug 'rust-lang/rust.vim'
 Plug 'reasonml-editor/vim-reason-plus'
@@ -179,6 +177,8 @@ call plug#end()
 set smarttab
 set tabstop=4
 set shiftwidth=4
+set softtabstop=4
+set autoindent
 set expandtab
 
 " Auto indent pasted text.
@@ -231,7 +231,7 @@ function! GotoJump()
     endif
   endif
 endfunction
-nmap <Leader>j :call GotoJump()<CR>
+nmap <leader>j :call GotoJump()<CR>
 
 "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -245,6 +245,9 @@ set spelllang=en,ru
 "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 "             Session
 "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+set undofile
+set undodir=~/.config/nvim/undodir
+
 augroup remember_folds
   autocmd!
   au BufWinLeave ?* mkview 1
@@ -393,6 +396,8 @@ let g:vim_markdown_math = 1
 ""               Coc
 ""~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
+nmap <leader>s :execute 'CocSearch -w '.expand('<cword>')<CR>
+" nmap <leader>s ::CocSearch -w
 nmap f <Plug>(coc-smartf-forward)
 nmap F <Plug>(coc-smartf-backward)
 nmap ; <Plug>(coc-smartf-repeat)
@@ -475,19 +480,20 @@ call coc#config('tslint-plugin', {
 
 
 ""JS
-call coc#add_extension('coc-eslint', 'coc-prettier')
+call coc#add_extension('coc-eslint')
 let g:coc_filetypes += ['javascript', 'javascript.jsx']
+autocmd FileType tsx,jsx,js,ts let b:coc_root_patterns = ['.git', '.env', 'package.json']
 call coc#config('eslint', {
 \ 'filetypes': ['javascript', 'javascript.jsx'],
 \ 'autoFixOnSave': v:false,
 \ })
 
-call coc#config('prettier', {
-\ 'singleQuote': v:true,
-\ 'trailingComma': 'all',
-\ 'jsxBracketSameLine': v:true,
-\ 'eslintIntegration': v:true,
-\ })
+" call coc#config('prettier', {
+" \ 'singleQuote': v:true,
+" \ 'trailingComma': 'all',
+" \ 'jsxBracketSameLine': v:true,
+" \ 'eslintIntegration': v:true,
+" \ })
 
 
 function IsCocEnabled()
@@ -511,7 +517,7 @@ endfunction
 " Use <c-space> to trigger completion.
 inoremap <silent><expr> <c-space> coc#refresh()
 
-" Use <cr> to confirm completion, `<C-g>u` means break undo chain at current position.
+" Use <cr> to confirm completion, `<C-g>u` means break undo chain at surrent position.
 " Coc only does snippet and additional edit on confirm.
 inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
 
@@ -587,7 +593,7 @@ let g:lightline = {
 
 " Using CocList
 " Show all diagnostics
-" nnoremap <silent> <space>a  :<C-u>CocList diagnostics<cr>
+nnoremap <silent> <space>a  :<C-u>CocList diagnostics<cr>
 " Manage extensions
 " nnoremap <silent> <space>e  :<C-u>CocList extensions<cr>
 " Show commands
@@ -595,7 +601,7 @@ nnoremap <silent> <space>c  :<C-u>CocList commands<cr>
 " Find symbol of current document
 nnoremap <silent> <space>o  :<C-u>CocList outline<cr>
 " Search workspace symbols
-" nnoremap <silent> <space>s  :<C-u>CocList -I symbols<cr>
+nnoremap <silent> <space>s  :<C-u>CocList -I symbols<cr>
 " Do default action for next item.
 " nnoremap <silent> <space>j  :<C-u>CocNext<CR>
 " Do default action for previous item.
@@ -651,113 +657,100 @@ let g:airline_mode_map = {
 \   't' : 'T',
 \}
 
-"~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-"                  ALE
-"~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-let g:ale_linters={
-\   'rust': ['cargo'],
-\	'go': ['golangci-lint', 'gopls'],
-\   'python': [],
-\   'javascript': ['eslint', 'flow'],
-\   'typescript': ['tslint', 'tsserver'],
-\   'php': ['phan', 'phpmd', 'php', 'psalm'],
-\   'reason': ['ols'],
-\   'c': [],
-\   'cpp': [],
-\}
-"\   'python': ['mypy', 'pylint', 'flake8'],
-
-let g:ale_c_ccls_init_options = {
-	\ 'cache': {'directory': '/tmp/ccls'},
-	\ 'clang': {
-	\   "extraArgs": [
-	\       "-I",
-	\       "/usr/local/Cellar/llvm/8.0.0_1/include/"
-	\	]
-	\ } 
-	\ }
-
-let g:ale_cpp_ccls_init_options = g:ale_c_ccls_init_options
-let g:ale_c_gcc_executable = '/usr/local/Cellar/gcc/9.1.0/bin/gcc-9'
-let g:ale_c_clang_executable = '/usr/local/Cellar/llvm/8.0.0_1/bin/clang'
-let g:ale_use_global_executables = 0
-let g:ale_c_clang_options = '-I /usr/local/Cellar/llvm/8.0.0_1/include/'
-
-call ale#linter#Define('php', {
-\   'name': 'psalm',
-\   'lsp': 'stdio',
-\   'executable': {b -> ale#node#FindExecutable(b, 'psalm_langserver', [
-\       'vendor/bin/psalm-language-server',
-\   ])},
-\   'command': '%e',
-\   'project_root': getcwd(),
-\})
-
-let g:context_derived_golangci_yml = getcwd() + "/.golangci.yml"
-if filereadable(g:context_derived_golangci_yml)
-    let g:ale_go_golangci_lint_options = "--enable-all --fast -c " . g:context_derived_golangci_yml
-else 
-    let g:ale_go_golangci_lint_options = "--enable-all --fast"
-endif
-
-call ale#linter#Define('go', {
-   \ 'name': 'revive',
-   \ 'output_stream': 'both',
-   \ 'executable': 'revive',
-   \ 'read_buffer': 0,
-   \ 'command': 'revive %t',
-   \ 'callback': 'ale#handlers#unix#HandleAsWarning',
-   \ })
-
-let g:ale_fixers={
-\   '*': ['trim_whitespace', 'remove_trailing_lines'],
-\   'go': ['goimports'],
-\   'rust': ['rustfmt'],
-\   'python': [],
-\   'javascript': ['eslint'],
-\   'typescript': ['tslint'],
-\   'reason': ['refmt'],
-\}
-
-" \   'python': ['add_blank_lines_for_python_control_statements', 'black', 'isort', 'trim_whitespace', 'remove_trailing_lines'],
-let g:ale_linter_aliases = {'typescript': ['typescript', 'tsx', 'typescript.tsx']}
-
-nmap <silent> <leader>an :ALENext<cr>
-nmap <silent> <leader>ap :ALEPrevious<cr>
-
-let g:ale_python_pylint_change_directory=0
-let g:ale_python_pylint_options = '--disable W1401,C0111 -E --load-plugins pylint_django --load-plugins pylint_django.checkers.db_performance'
-let g:ale_python_flake8_options = '--append-config="select=B,E,F,W,I,C"'
-let g:ale_python_auto_pipenv=0
-let g:ale_c_parse_makefile=1
-let g:ale_rust_cargo_use_clippy=executable('cargo-clippy')
-let g:ale_rust_cargo_check_all_targets=1
-
-let g:ale_fix_on_save=0
-
-let g:ale_virtualtext_cursor=1
-let g:ale_virtualtext_prefix='‣ '
-
-let g:ale_sign_error='✖'
-let g:ale_sign_warning='⚠'
-let g:ale_sign_info='ℹ'
-
-highlight clear ALEErrorSign
-highlight clear ALEWarningSign
-highlight clear ALEInfoSign
-
-highlight link ALEVirtualTextError GruvboxRed
-highlight link ALEVirtualTextWarning GruvboxYellow
-highlight link ALEVirtualTextInfo GruvboxGray
-highlight link ALEVirtualTextStyleError GruvboxRed
-highlight link ALEVirtualTextStyleWarning GruvboxYellow
-
-nmap <A-d>      <Plug>(ale_detail)
-nmap <A-f>      <Plug>(ale_fix)
+" "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+" "                  ALE
+" "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+" 
+" let g:ale_linters={
+" \   'rust': ['cargo'],
+" \	'go': ['golangci-lint', 'gopls'],
+" \   'python': [],
+" \   'javascript': ['eslint', 'flow'],
+" \   'typescript': ['tslint', 'tsserver'],
+" \   'php': ['phan', 'phpmd', 'php', 'psalm'],
+" \   'reason': ['ols'],
+" \   'c': [],
+" \   'cpp': [],
+" \}
+" "\   'python': ['mypy', 'pylint', 'flake8'],
+" 
+" let g:ale_c_ccls_init_options = {
+" 	\ 'cache': {'directory': '/tmp/ccls'},
+" 	\ 'clang': {
+" 	\   "extraArgs": [
+" 	\       "-I",
+" 	\       "/usr/local/Cellar/llvm/8.0.0_1/include/"
+" 	\	]
+" 	\ } 
+" 	\ }
+" 
+" 
+" call ale#linter#Define('php', {
+" \   'name': 'psalm',
+" \   'lsp': 'stdio',
+" \   'executable': {b -> ale#node#FindExecutable(b, 'psalm_langserver', [
+" \       'vendor/bin/psalm-language-server',
+" \   ])},
+" \   'command': '%e',
+" \   'project_root': getcwd(),
+" \})
+" 
+" let g:context_derived_golangci_yml = getcwd() + "/.golangci.yml"
+" if filereadable(g:context_derived_golangci_yml)
+"     let g:ale_go_golangci_lint_options = "--enable-all --fast -c " . g:context_derived_golangci_yml
+" else
+"     let g:ale_go_golangci_lint_options = "--enable-all --fast"
+" endif
+" 
+" call ale#linter#Define('go', {
+"    \ 'name': 'revive',
+"    \ 'output_stream': 'both',
+"    \ 'executable': 'revive',
+"    \ 'read_buffer': 0,
+"    \ 'command': 'revive %t',
+"    \ 'callback': 'ale#handlers#unix#HandleAsWarning',
+"    \ })
+" 
+" let g:ale_fixers={
+" \   '*': ['trim_whitespace', 'remove_trailing_lines'],
+" \   'go': ['goimports'],
+" \   'rust': ['rustfmt'],
+" \   'python': [],
+" \   'javascript': ['eslint'],
+" \   'typescript': ['tslint'],
+" \   'reason': ['refmt'],
+" \}
+" 
+" let g:ale_linter_aliases = {'typescript': ['typescript', 'tsx', 'typescript.tsx']}
+" 
+" nmap <silent> <leader>an :ALENext<cr>
+" nmap <silent> <leader>ap :ALEPrevious<cr>
+" let g:ale_c_parse_makefile=1
+" let g:ale_rust_cargo_use_clippy=executable('cargo-clippy')
+" let g:ale_rust_cargo_check_all_targets=1
+" let g:ale_lint_on_text_changed = 'never'
+" let g:ale_fix_on_save=0
+" let g:ale_virtualtext_cursor=1
+" let g:ale_virtualtext_prefix='‣ '
+" let g:ale_sign_error='✖'
+" let g:ale_sign_warning='⚠'
+" let g:ale_sign_info='ℹ'
+" 
+" highlight clear ALEErrorSign
+" highlight clear ALEWarningSign
+" highlight clear ALEInfoSign
+" 
+" highlight link ALEVirtualTextError GruvboxRed
+" highlight link ALEVirtualTextWarning GruvboxYellow
+" highlight link ALEVirtualTextInfo GruvboxGray
+" highlight link ALEVirtualTextStyleError GruvboxRed
+" highlight link ALEVirtualTextStyleWarning GruvboxYellow
+" 
+" nmap <A-d>      <Plug>(ale_detail)
+" nmap <A-f>      <Plug>(ale_fix)
 
 function! s:check_battery()
-    if g:os == "osx" 
+    if g:os == "osx"
         call system('pmset -g batt | grep "Battery Power"')
     else
         call system('upower -d | grep -E "on-battery:\s+yes"')
@@ -772,7 +765,6 @@ function! s:powersafe_mode(timer)
     let on_battery = s:check_battery()
     if on_battery != s:restricted
         let s:restricted=on_battery
-		let g:ale_lint_on_text_changed=s:restricted ? 'never' : 'always'
 
 		if s:restricted == 1
 			setl updatetime=4000
@@ -783,41 +775,15 @@ function! s:powersafe_mode(timer)
 		endif
 
 		call coc#config('git', {
-					\ 'xaddGlameToVirtualText': s:restricted ? v:false: v:true,
-					\ 'addGlameToBufferVar': s:restricted ? v:false: v:true,
+					\ 'xaddGBlameToVirtualText': s:restricted ? v:false: v:true,
+					\ 'addGBlameToBufferVar': s:restricted ? v:false: v:true,
 					\ 'enableGutters': s:restricted ? v:false: v:true
 					\})
     endif
 endfunction
 
-" call timer_start(5 * 1000, function('s:powersafe_mode'), {'repeat': -1})
-" call timer_start(1, function('s:powersafe_mode'), {'repeat': 0})
-
-"~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-"             LanguageClient
-"~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-"let g:LanguageClient_serverCommands={
-"\   'rust': ['rustup', 'run', 'nightly', 'rls'],
-"\   'python': ['pyls'],
-"\   'javascript': ['flow-language-server', '--try-flow-bin', '--no-auto-download', '--stdio'],
-"\   'go': ['go-langserver', '-logfile', '/tmp/go-langserver.log', '-diagnostics', '-gocodecompletion'],
-"\   'typescript': ['tsserver'],
-"\   'reason': ['ocaml-language-server', '--stdio'],
-"\   'ocaml': ['ocaml-language-server', '--stdio'],
-"\}
-"
-"autocmd FileType rust,go,python setlocal omnifunc=LanguageClient#complete
-"
-"" I use ALE for diagnostics.
-"let g:LanguageClient_diagnosticsEnable=0
-"
-"nnoremap <F5> :call LanguageClient_contextMenu()<CR>
-"nnoremap <silent> <leader>h :call LanguageClient#textDocument_hover()<CR>
-"nnoremap <silent> <leader>s :call LanguageClient#textDocument_documentSymbol()<CR>
-"nnoremap <silent> <leader>d :call LanguageClient#textDocument_definition()<CR>
-"nnoremap <silent> <leader>r :call LanguageClient#textDocument_rename()<CR>
-"
-"set completefunc=LanguageClient#complete
+call timer_start(5 * 1000, function('s:powersafe_mode'), {'repeat': -1})
+call timer_start(1, function('s:powersafe_mode'), {'repeat': 0})
 
 "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 "                deoplete
@@ -870,7 +836,7 @@ let g:dbext_default_window_increment=50
 let g:ctrlp_user_command=['cd %s && git ls-files -co --exclude-standard', 'cd %s && fd']
 " let g:ctrlp_root_markers=['package.json']
 let g:ctrlp_root_markers=['.ccls', 'venv', 'Makefile', 'manage.py', '.root', '.git', 'package.json', 'go.mod', 'Cargo.toml']
-let g:ctrlp_working_path_mode='rc'
+" let g:ctrlp_working_path_mode='rc'
 "let g:ctrlp_match_func={'match': 'pymatcher#PyMatch'}
 
 "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -879,7 +845,7 @@ let g:ctrlp_working_path_mode='rc'
 
 let g:ctrlsf_winsize = '35%'
 let g:ctrlsf_default_view_mode = 'compact'
-let g:ctrlsf_default_root = 'project'
+" let g:ctrlsf_default_root = 'project'
 
 nmap     <C-F>f <Plug>CtrlSFPrompt
 vmap     <C-F>f <Plug>CtrlSFVwordPath
@@ -894,8 +860,8 @@ inoremap <C-F>t <Esc>:CtrlSFToggle<CR>
 "                FlyGrep
 "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-nnoremap <leader>s :FlyGrep<CR>
-vnoremap <leader>s :FlyGrep<CR>
+" nnoremap <leader>s :FlyGrep<CR>
+" vnoremap <leader>s :FlyGrep<CR>
 
 "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 "                Rust
@@ -907,19 +873,29 @@ let g:rust_clip_command = 'pbcopy'
 "                Rooter
 "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-" let g:rooter_silent_chdir=1
+let g:rooter_silent_chdir=1
 let g:rooter_patterns=['.vim/', '.root', '.git/', '.svn/', 'go.mod', 'package.json', 'Cargo.toml', 'requirements.txt']
 
+"~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+"                Colors
+"~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+highlight! link CocErrorSign GruvboxRed
+highlight! link CocWarningSign GruvboxYellow
+highlight! link CocInfoSign GruvboxGray
 "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 "             File specific
 "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 "TODO: what about using groups?
+" highlight default BadWhitespace ctermbg=red guibg=red
+" autocmd BufRead,BufNewFile *.py,*.c,*.h match BadWhitespace /\s\+$/
 autocmd FileType json syntax match Comment +\/\/.\+$+
-autocmd FileType jinja,tex,markdown setlocal wrap spell cc=0 nonu nornu
+autocmd FileType jinja,tex,html,markdown setlocal wrap spell cc=0 nonu nornu
 autocmd FileType yate setlocal smartindent
-autocmd BufNewFile,BufRead *.tsx,*.jsx set filetype=typescript.tsx
+autocmd BufNewFile,BufRead *.tsx set filetype=typescript.tsx
+autocmd BufNewFile,BufRead *.jsx set filetype=javascript.jsx
 autocmd BufNewFile,BufRead *.js.flow set filetype=javascript
 autocmd BufNewFile,BufRead *.jinja2 set syntax=jinja
 autocmd BufWritePre *.go :call CocAction('runCommand', 'editor.action.organizeImport')
-autocmd BufWritePre *.py :call CocAction('runCommand', 'python.sortImports')
+" autocmd BufWritePre *.py :call CocAction('runCommand', 'python.sortImports')
