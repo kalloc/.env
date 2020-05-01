@@ -22,19 +22,10 @@
     "suggest.localityBonus": true,
     "signature.enable": true,
     "signature.target": "float",
-    "project.rootPatterns": [
-        ".env",
-        "pipreq.txt",
-        "manage.py",
-        "venv",
-        "requirements.txt",
-        "package.json",
-        "Cargo.toml",
-        ".git"
-    ],
     "coc.preferences.rootPatterns": [
         ".vim",
         ".git",
+        ".env",
         ".hg",
         ".root",
         ".projections.json"
@@ -130,7 +121,7 @@
             }
         }
     },
-    "git.enableGutters": true,
+    "git.enableGutters": false,
     "git.realtimeGutters": true,
     "git.addGBlameToVirtualText": false,
     "git.addGBlameToBufferVar": false,

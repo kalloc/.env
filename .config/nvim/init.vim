@@ -448,6 +448,7 @@ augroup END
 call coc#add_extension('coc-rls')
 let g:coc_filetypes += ['rust']
 call coc#config('rust', { 'clippy_preference': 'on' })
+autocmd FileType rust let b:coc_root_patterns = ['Cargo.toml', '.git', '.env']
 
 let g:rust_recommended_style = 0
 
@@ -463,7 +464,6 @@ augroup vimrc-language-python
   autocmd!
 augroup END
 autocmd FileType python let b:coc_root_patterns = ['manage.py', 'venv', 'requirements.txt', '.git', '.env']
-autocmd FileType rust let b:coc_root_patterns = ['Cargo.toml']
 let g:python_highlight_all = 1
 
 "" PHP
@@ -482,7 +482,7 @@ call coc#config('tslint-plugin', {
 ""JS
 call coc#add_extension('coc-eslint')
 let g:coc_filetypes += ['javascript', 'javascript.jsx']
-autocmd FileType tsx,jsx,js,ts let b:coc_root_patterns = ['.git', '.env', 'package.json']
+autocmd FileType typescript,tsx,jsx,js,ts let b:coc_root_patterns = ['.git', '.env', 'package.json']
 call coc#config('eslint', {
 \ 'filetypes': ['javascript', 'javascript.jsx'],
 \ 'autoFixOnSave': v:false,
@@ -874,7 +874,7 @@ let g:rust_clip_command = 'pbcopy'
 "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 let g:rooter_silent_chdir=1
-let g:rooter_patterns=['.vim/', '.root', '.git/', '.svn/', 'go.mod', 'package.json', 'Cargo.toml', 'requirements.txt']
+let g:rooter_patterns=['.vim', '.env', '.root', '.git', '.svn', 'go.mod', 'package.json', 'Cargo.toml', 'requirements.txt']
 
 "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 "                Colors
