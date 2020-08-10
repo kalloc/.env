@@ -109,6 +109,7 @@ Plug 'machakann/vim-highlightedyank'
 
 " Text.
 Plug 'numirias/semshi', {'do': ':UpdateRemotePlugins'}
+Plug 'lyokha/vim-xkbswitch'
 
 Plug 'arakashic/chromatica.nvim', {'for': ['c', 'cpp'], 'do': ':UpdateRemotePlugins'}
 " Plug 'ciaranm/detectindent'
@@ -124,6 +125,8 @@ Plug 'justinmk/vim-sneak'
 
 " Integrations.
 "Plug 'vim-scripts/dbext.vim'
+Plug 'puremourning/vimspector'
+let g:vimspector_enable_mappings = 'HUMAN'
 Plug 'tpope/vim-fugitive'
 Plug 'rizzatti/dash.vim'
 Plug 'airblade/vim-rooter'
@@ -354,7 +357,7 @@ autocmd FileType python nmap <silent> <leader>sge :Semshi goto error<CR>
 "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 let g:NERDTrimTrailingWhitespace = 1
 let g:NERDSpaceDelims = 1
-
+let g:NERDTreeHijackNetrw = 1
 "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 "                NERDTree
 "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -373,8 +376,7 @@ let g:NERDTreeIndicatorMapCustom = {
   \ 'Deleted'   : '×',
   \ }
 
-
-nnoremap <silent> <leader>x :NERDTreeToggle<CR>
+nnoremap <silent> <leader>x :NERDTreeToggle %<CR>
 
 "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 "                FlyGrep
@@ -391,6 +393,13 @@ let g:markdown_fenced_languages = ['sh', 'php=php', 'css', 'js=javascript']
 let g:vim_markdown_fenced_languages = ['sh', 'php=php', 'css', 'js=javascript']
 let g:vim_markdown_frontmatter = 1
 let g:vim_markdown_math = 1
+
+""~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+""               vim-xkbswitch 
+""~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+let g:XkbSwitchEnabled = 1
+let g:XkbSwitchLib = '/usr/local/lib/libxkbswitch.dylib'
+let g:XkbSwitchIMappings = ['ru']
 
 ""~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ""               Coc
@@ -436,6 +445,7 @@ endif
 "" Java
 call coc#add_extension('coc-java')
 let g:coc_filetypes += ['java']
+autocmd FileType java let b:coc_root_patterns = ['pom.xml', '.git', '.env', 'package.json']
 
 "" Go
 call coc#add_extension('coc-go')
@@ -469,6 +479,7 @@ let g:python_highlight_all = 1
 "" PHP
 call coc#add_extension('coc-phpls')
 let g:coc_filetypes += ['php']
+autocmd FileType php let b:coc_root_patterns = ['.git', '.env', 'composer.json']
 
 ""TypeScript
 call coc#add_extension('coc-tsserver',  'coc-tslint-plugin')
@@ -477,7 +488,6 @@ call coc#config('tslint-plugin', {
 			\ 'filetypes': ['typescript', 'typescript.tsx'],
 			\ 'autoFixOnSave': v:false,
 			\ })
-
 
 ""JS
 call coc#add_extension('coc-eslint')
@@ -832,12 +842,10 @@ let g:dbext_default_window_increment=50
 "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 "                CtrlP
 "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-let g:ctrlp_user_command=['cd %s && git ls-files -co --exclude-standard', 'cd %s && fd']
-" let g:ctrlp_root_markers=['package.json']
+let g:ctrlp_user_command=['.git', 'cd %s && git ls-files . -co --exclude-standard', 'cd %s && fd']
 let g:ctrlp_root_markers=['.ccls', 'venv', 'Makefile', 'manage.py', '.root', '.git', 'package.json', 'go.mod', 'Cargo.toml']
 " let g:ctrlp_working_path_mode='rc'
-"let g:ctrlp_match_func={'match': 'pymatcher#PyMatch'}
+let g:ctrlp_match_func={'match': 'pymatcher#PyMatch'}
 
 "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 "                CtrlSF
@@ -873,8 +881,9 @@ let g:rust_clip_command = 'pbcopy'
 "                Rooter
 "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-let g:rooter_silent_chdir=1
-let g:rooter_patterns=['.vim', '.env', '.root', '.git', '.svn', 'go.mod', 'package.json', 'Cargo.toml', 'requirements.txt']
+let g:rooter_silent_chdir=0
+let g:rooter_change_directory_for_non_project_files = 'current'
+let g:rooter_patterns=['.git/', '.gradle/', '.root', '.git/', '.svn/', 'go.mod', 'package.json', 'Cargo.toml', 'requirements.txt', 'composer.json', '.vim/' , '.env']
 
 "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 "                Colors
@@ -897,5 +906,6 @@ autocmd BufNewFile,BufRead *.tsx set filetype=typescript.tsx
 autocmd BufNewFile,BufRead *.jsx set filetype=javascript.jsx
 autocmd BufNewFile,BufRead *.js.flow set filetype=javascript
 autocmd BufNewFile,BufRead *.jinja2 set syntax=jinja
+autocmd BufNewFile,BufRead *.java set syntax=java
 autocmd BufWritePre *.go :call CocAction('runCommand', 'editor.action.organizeImport')
 " autocmd BufWritePre *.py :call CocAction('runCommand', 'python.sortImports')

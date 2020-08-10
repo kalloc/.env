@@ -131,5 +131,9 @@
     "git.removedSign.hlGroup": "GruvboxRedSign",
     "git.topRemovedSign.hlGroup": "GruvboxRedSign",
     "git.changeRemovedSign.hlGroup": "GruvboxPurpleSign",
-    "coc.preferences.extensionUpdateCheck": "daily"
+    "coc.preferences.extensionUpdateCheck": "daily",
+    "java.errors.incompleteClasspath.severity": "ignore",
+    "rust-client.revealOutputChannelOn": "info",
+    "java.trace.server": "verbose"
 }
+
