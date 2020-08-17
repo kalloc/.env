@@ -48,7 +48,7 @@ grep '%sudo   ALL=(ALL:ALL) NOPASSWD:ALL' /etc/sudoers 2>&1 > /dev/null || (
 )
 
 if [[ ! -e ${userroot}/.nix-profile ]];then
-	sudo -H -u y bash -c "bash <(curl https://nixos.org/nix/install)"
+	sudo -H -u y bash -c "sh <(curl -L https://nixos.org/nix/install) --daemon"
 fi
 
 sudo -H -u y bash <<EOF
@@ -56,7 +56,7 @@ echo install nix
 . \$HOME/.nix-profile/etc/profile.d/nix.sh
 nix-env -i git neovim mosh exo ripgrep tmux \
     ccls jq httpie fd bat asciinema \
-    python3.7 python3.7-pip python3.7-pip-tools python3.7-setuptools python3.7-pynvim \
+    python3 python3.8-pip python3.8-pip-tools python3.8-setuptools python3.8-pynvim \
     nodejs \
      -j8
 
