@@ -47,7 +47,7 @@ grep '%sudo   ALL=(ALL:ALL) NOPASSWD:ALL' /etc/sudoers 2>&1 > /dev/null || (
 	sed 's/^%sudo.*/%sudo   ALL=(ALL:ALL) NOPASSWD:ALL/g' -i /etc/sudoers
 )
 
-if [[ ! -e ${userroot}/.nix-profile ]];then
+if [[ ! -e /nix ]];then
 	sudo -H -u y bash -c "sh <(curl -L https://nixos.org/nix/install) --daemon"
 fi
 
