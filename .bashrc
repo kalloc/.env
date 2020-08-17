@@ -80,7 +80,7 @@ fi
 export HISTCONTROL=ignoreboth
 
 # Nix
-test -r $HOME/.nix-profile/ && . $HOME/.nix-profile/etc/profile.d/nix.sh
+test -r $HOME/.nix-profile/etc/profile.d/nix.sh && . $HOME/.nix-profile/etc/profile.d/nix.sh
 
 # Pyenv
 export PATH="$HOME/.pyenv/bin:$PATH"
