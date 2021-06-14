@@ -89,7 +89,9 @@ export NVM_DIR="\$HOME/.nvm"
 [ -s "\$NVM_DIR/nvm.sh" ] && \. "\$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "\$NVM_DIR/bash_completion" ] && \. "\$NVM_DIR/bash_completion"
 cd && nvm install node
+nvm alias default node
 fi
+npm install -g tsc
 
 EOF
 
@@ -154,14 +156,10 @@ echo install nvim plug
 curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs \
     https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 
-nvim -eS -c ":PlugInstall" -c ":xa"
 mkdir -p ~/.config/coc/extensions
 cd ~/.config/coc/extensions
-npm install --global-style --ignore-scripts --no-bin-links --no-package-lock --only=prod  \
-    coc-ccls coc-conventional coc-diagnostic coc-eslint coc-explorer coc-flow \
-    coc-fzf-preview coc-go coc-grammarly coc-html coc-import-cost coc-java \
-    coc-json coc-kotlin coc-marketplace coc-phpls coc-python coc-react-refactor \
-    coc-rust-analyzer coc-snippets coc-sql coc-swagger \
-    coc-tslint coc-tslint-plugin coc-tsserver \
-    coc-webpack coc-xml coc-yaml
+ln -s ~/.myenv/coc-extensions-package.json ~/.config/coc/extensions/package.json
+yarn install
+nvim -eS -c ":PlugInstall" -c ":CocRebuild" -c ":xa"
+
 EOF
