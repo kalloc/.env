@@ -81,7 +81,7 @@ ln -sf \$HOME/.env/.bashrc \$HOME/
 ln -sf \$HOME/.env/.bash_aliases \$HOME/
 EOF
 
-test $USE_NODEJS && sudo -Hi -u y bash <<EOF
+sudo -Hi -u y bash <<EOF
 if [[ ! -r \$HOME/.nvm ]]; then 
 echo install nvm
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.34.0/install.sh | bash;
@@ -91,8 +91,7 @@ export NVM_DIR="\$HOME/.nvm"
 cd && nvm install node
 nvm alias default node
 fi
-npm install -g tsc
-
+npm install -g typescript yarn
 EOF
 
 

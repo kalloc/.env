@@ -449,21 +449,21 @@ call coc#config('diagnostic', {
 \ 'infoSign': 'ℹ'
 \})
 
-"" C/C++
-call coc#add_extension('coc-ccls')
-let g:coc_filetypes += ['c', 'cpp']
-if g:os == "osx" 
-    call coc#config('languageserver.ccls.initializationOptions.clang',
-                \ {
-                \ "resourceDir": "/Library/Developer/CommandLineTools/usr/lib/clang/10.0.1",
-                \ "extraArgs": [
-                \   "-Wno-unused-variable",
-                \   "-isystem",
-                \   "/Library/Developer/CommandLineTools/usr/include/c++/v1/",
-                \  "-I", "/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/"
-                \ ]
-                \ })
-endif
+"" "" C/C++
+"" call coc#add_extension('coc-ccls')
+"" let g:coc_filetypes += ['c', 'cpp']
+"" if g:os == "osx" 
+""     call coc#config('languageserver.ccls.initializationOptions.clang',
+""                 \ {
+""                 \ "resourceDir": "/Library/Developer/CommandLineTools/usr/lib/clang/10.0.1",
+""                 \ "extraArgs": [
+""                 \   "-Wno-unused-variable",
+""                 \   "-isystem",
+""                 \   "/Library/Developer/CommandLineTools/usr/include/c++/v1/",
+""                 \  "-I", "/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/"
+""                 \ ]
+""                 \ })
+"" endif
 "" Java
 call coc#add_extension('coc-java')
 let g:coc_filetypes += ['java']
