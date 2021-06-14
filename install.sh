@@ -158,7 +158,7 @@ curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs \
 
 mkdir -p ~/.config/coc/extensions
 cd ~/.config/coc/extensions
-ln -s ~/.myenv/coc-extensions-package.json ~/.config/coc/extensions/package.json
+ln -s ~/.env/coc-extensions-package.json ~/.config/coc/extensions/package.json
 yarn install
 nvim -eS -c ":PlugInstall" -c ":CocRebuild" -c ":xa"
 
