@@ -48,10 +48,10 @@ grep '%sudo   ALL=(ALL:ALL) NOPASSWD:ALL' /etc/sudoers 2>&1 > /dev/null || (
 )
 
 if [[ ! -e /nix ]];then
-	sudo -H -u y bash -c "sh <(curl -L https://nixos.org/nix/install) --daemon"
+	sudo -Hi -u y bash -c "sh <(curl -L https://nixos.org/nix/install) --daemon"
 fi
 
-sudo -H -u y bash <<EOF
+sudo -Hi -u y bash <<EOF
 echo install nix
 nix-env -i git neovim mosh exo ripgrep tmux \
     ccls jq httpie fd bat asciinema \
@@ -81,7 +81,7 @@ ln -sf \$HOME/.env/.bashrc \$HOME/
 ln -sf \$HOME/.env/.bash_aliases \$HOME/
 EOF
 
-test $USE_NODEJS && sudo -H -u y bash <<EOF
+test $USE_NODEJS && sudo -Hi -u y bash <<EOF
 if [[ ! -r \$HOME/.nvm ]]; then 
 echo install nvm
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.34.0/install.sh | bash;
@@ -94,7 +94,7 @@ fi
 EOF
 
 
-test $USE_PYTHON && sudo -H -u y bash <<EOF
+test $USE_PYTHON && sudo -Hi -u y bash <<EOF
 if [[ ! -r \$HOME/.pyenv ]]; then 
 echo install pyenv
 curl -L https://github.com/pyenv/pyenv-installer/raw/master/bin/pyenv-installer | bash
@@ -106,7 +106,7 @@ pyenv global 3.7.4
 fi
 EOF
 
-test $USE_GO && sudo -H -u y bash <<EOF
+test $USE_GO && sudo -Hi -u y bash <<EOF
 if [[ ! -r \$HOME/.gvm ]]; then 
 echo install gvm
 bash < <(curl -s -S -L https://raw.githubusercontent.com/moovweb/gvm/master/binscripts/gvm-installer)
@@ -116,7 +116,7 @@ gvm use go1.12.7 --default
 fi
 EOF
 
-test $USE_OCAML && sudo -H -u y bash <<EOF
+test $USE_OCAML && sudo -Hi -u y bash <<EOF
 if [[ ! -r \$HOME/.opam ]]; then 
 echo install opam
 echo "check_certificate = off" > ~/.wgetrc
@@ -126,7 +126,7 @@ opam init
 fi
 EOF
 
-test $USE_ELIXIR && sudo -H -u y bash <<EOF
+test $USE_ELIXIR && sudo -Hi -u y bash <<EOF
 if [[ ! -r \$HOME/.exenv ]]; then 
 echo install elixir
 git clone git://github.com/mururu/exenv.git ~/.exenv
@@ -140,14 +140,14 @@ exenv global 1.9.1
 fi
 EOF
 
-test $USE_RUST && sudo -H -u y bash <<EOF
+test $USE_RUST && sudo -Hi -u y bash <<EOF
 if [[ ! -r \$HOME/.cargo ]]; then 
 echo install cargo
 curl https://sh.rustup.rs -sSf | sh -s -- --no-modify-path -y
 fi
 EOF
 
-sudo -H -u y bash <<EOF
+sudo -Hi -u y bash <<EOF
 
 echo install nvim plug
 
