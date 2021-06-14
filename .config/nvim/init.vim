@@ -106,19 +106,21 @@ Plug 'morhetz/gruvbox'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'FelikZ/ctrlp-py-matcher'
 Plug 'machakann/vim-highlightedyank'
+" Plug 'edkolev/tmuxline.vim'
 
 " Text.
 Plug 'numirias/semshi', {'do': ':UpdateRemotePlugins'}
-Plug 'lyokha/vim-xkbswitch'
-
+if g:os == "osx" 
+    " Plug 'lyokha/vim-xkbswitch'
+endif
+" 
 Plug 'arakashic/chromatica.nvim', {'for': ['c', 'cpp'], 'do': ':UpdateRemotePlugins'}
 " Plug 'ciaranm/detectindent'
 Plug 'tpope/vim-markdown', { 'for': ['markdown'] }
 Plug 'godlygeek/tabular', { 'for': ['tex', 'markdown'] }
-"Plug 'lyokha/vim-xkbswitch'
 Plug 'scrooloose/nerdcommenter'
 Plug 'terryma/vim-multiple-cursors'
-Plug 'jiangmiao/auto-pairs'
+" Plug 'jiangmiao/auto-pairs'
 Plug 'dyng/ctrlsf.vim'
 Plug 'wsdjeg/FlyGrep.vim'
 Plug 'justinmk/vim-sneak'
@@ -144,13 +146,13 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
 Plug 'jackguo380/vim-lsp-cxx-highlight'
 
-" if has('nvim')
-"     Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-" else
-"     Plug 'Shougo/deoplete.nvim'
-"     Plug 'roxma/nvim-yarp'
-"     Plug 'roxma/vim-hug-neovim-rpc'
-" endif
+if has('nvim')
+    Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+else
+    Plug 'Shougo/deoplete.nvim'
+    Plug 'roxma/nvim-yarp'
+    Plug 'roxma/vim-hug-neovim-rpc'
+endif
 
 " Languages.
 Plug 'neovimhaskell/haskell-vim'
@@ -170,6 +172,8 @@ Plug 'Glench/Vim-Jinja2-Syntax', { 'for': ['jinja', 'jinja2'] }
 Plug 'mustache/vim-mustache-handlebars'
 " Plug 'carlitux/deoplete-ternjs'
 Plug 'pearofducks/ansible-vim'
+Plug 'thesis/vim-solidity'
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 
 call plug#end()
 
@@ -376,7 +380,8 @@ let g:NERDTreeIndicatorMapCustom = {
   \ 'Deleted'   : '×',
   \ }
 
-nnoremap <silent> <leader>x :NERDTreeToggle %<CR>
+" nnoremap <silent> <leader>x :NERDTreeToggle %<CR>
+nnoremap <silent> <leader>x :CocCommand explorer<CR>
 
 "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 "                FlyGrep
@@ -397,13 +402,32 @@ let g:vim_markdown_math = 1
 ""~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ""               vim-xkbswitch 
 ""~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-let g:XkbSwitchEnabled = 1
-let g:XkbSwitchLib = '/usr/local/lib/libxkbswitch.dylib'
-let g:XkbSwitchIMappings = ['ru']
+" let g:XkbSwitchEnabled = 1
+" let g:XkbSwitchLib = '/usr/local/lib/libxkbswitch.dylib'
+" let g:XkbSwitchIMappings = ['ru']
 
 ""~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ""               Coc
 ""~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+nmap <Leader>f [fzf-p]
+xmap <Leader>f [fzf-p]
+
+nnoremap <silent> [fzf-p]p     :<C-u>FzfPreviewFromResourcesRpc project_mru git<CR>
+nnoremap <silent> [fzf-p]gs    :<C-u>FzfPreviewGitStatusRpc<CR>
+nnoremap <silent> [fzf-p]ga    :<C-u>FzfPreviewGitActionsRpc<CR>
+nnoremap <silent> [fzf-p]b     :<C-u>FzfPreviewBuffersRpc<CR>
+nnoremap <silent> [fzf-p]B     :<C-u>FzfPreviewAllBuffersRpc<CR>
+nnoremap <silent> [fzf-p]o     :<C-u>FzfPreviewFromResourcesRpc buffer project_mru<CR>
+nnoremap <silent> [fzf-p]<C-o> :<C-u>FzfPreviewJumpsRpc<CR>
+nnoremap <silent> [fzf-p]g;    :<C-u>FzfPreviewChangesRpc<CR>
+nnoremap <silent> [fzf-p]/     :<C-u>FzfPreviewLinesRpc --add-fzf-arg=--no-sort --add-fzf-arg=--query="'"<CR>
+nnoremap <silent> [fzf-p]*     :<C-u>FzfPreviewLinesRpc --add-fzf-arg=--no-sort --add-fzf-arg=--query="'<C-r>=expand('<cword>')<CR>"<CR>
+nnoremap          [fzf-p]gr    :<C-u>FzfPreviewProjectGrepRpc<Space>
+xnoremap          [fzf-p]gr    "sy:FzfPreviewProjectGrepRpc<Space>-F<Space>"<C-r>=substitute(substitute(@s, '\n', '', 'g'), '/', '\\/', 'g')<CR>"
+nnoremap <silent> [fzf-p]t     :<C-u>FzfPreviewBufferTagsRpc<CR>
+nnoremap <silent> [fzf-p]q     :<C-u>FzfPreviewQuickFixRpc<CR>
+nnoremap <silent> [fzf-p]l     :<C-u>FzfPreviewLocationListRpc<CR>
 
 nmap <leader>s :execute 'CocSearch -w '.expand('<cword>')<CR>
 " nmap <leader>s ::CocSearch -w
@@ -418,8 +442,6 @@ augroup Smartf
 augroup end<Plug>CocRefresh
 
 let g:coc_filetypes = []
-
-autocmd CursorHold * silent call CocActionAsync('highlight')
 
 call coc#config('diagnostic', {
 \ 'errorSign': '✖',
@@ -445,7 +467,7 @@ endif
 "" Java
 call coc#add_extension('coc-java')
 let g:coc_filetypes += ['java']
-autocmd FileType java let b:coc_root_patterns = ['pom.xml', '.git', '.env', 'package.json']
+autocmd FileType java let b:coc_root_patterns = ['pom.xml', 'build.gradle', '.git', '.env', 'package.json']
 
 "" Go
 call coc#add_extension('coc-go')
@@ -455,7 +477,7 @@ augroup vimrc-go
 augroup END
 
 "" Rust
-call coc#add_extension('coc-rls')
+call coc#add_extension('coc-rust-analyzer')
 let g:coc_filetypes += ['rust']
 call coc#config('rust', { 'clippy_preference': 'on' })
 autocmd FileType rust let b:coc_root_patterns = ['Cargo.toml', '.git', '.env']
@@ -549,7 +571,7 @@ function! s:show_documentation()
   if (index(['vim','help'], &filetype) >= 0)
     execute 'h '.expand('<cword>')
   else
-    call CocAction('doHover')
+    call CocActionAsync('doHover')
   endif
 endfunction
 
@@ -560,13 +582,13 @@ autocmd CursorHold * silent call CocActionAsync('highlight')
 nmap <leader>n <Plug>(coc-rename)
 
 " Remap for format selected region
-xmap <leader>f  <Plug>(coc-format-selected)
-nmap <leader>f  <Plug>(coc-format-selected)
+" xmap <leader>f  <Plug>(coc-format-selected)
+" nmap <leader>f  <Plug>(coc-format-selected)
 
 augroup mygroup
   autocmd!
   " Setup formatexpr specified filetype(s).
-  autocmd FileType typescript,json setl formatexpr=CocAction('formatSelected')
+  autocmd FileType typescript,json setl formatexpr=CocActionAsync('formatSelected')
   " Update signature help on jump placeholder
   autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
 augroup end
@@ -581,10 +603,10 @@ nmap <leader>ac  <Plug>(coc-codeaction)
 nmap <leader>qf  <Plug>(coc-fix-current)
 
 " Use `:Format` to format current buffer
-command! -nargs=0 Format :call CocAction('format')
+command! -nargs=0 Format :call CocActionAsync('format')
 
 " Use `:Fold` to fold current buffer
-command! -nargs=? Fold :call     CocAction('fold', <f-args>)
+command! -nargs=? Fold :call     CocActionAsync('fold', <f-args>)
 
 
 " Add diagnostic info for https://github.com/itchyny/lightline.vim
@@ -625,12 +647,19 @@ nnoremap <silent> <space>s  :<C-u>CocList -I symbols<cr>
 
 set laststatus=2
 set showtabline=2
+set re=1
+set ttyfast
+set lazyredraw
 set noshowmode
+let g:airline_highlighting_cache = 1
+let g:airline_powerline_fonts = 1
 
 let g:airline_section_c="%{expand('%:~:.:s|/src/|/s/|:s|^\\~/projects/|λ/|')}"
 let g:airline#extensions#tabline#fnamemod=':~:s|^\~/projects/\(.\{-}\)/\(.\{-}\)\(/.*\)\=$|[\1] \2|'
 
+let g:airline#extensions#xkblayout#enabled=0
 let g:airline#extensions#tabline#enabled=1
+let g:airline#extensions#tabline#formatter = 'default'
 let g:airline#extensions#tabline#show_splits=0
 let g:airline#extensions#tabline#show_buffers=0
 let g:airline#extensions#tabline#show_close_button=0
@@ -639,7 +668,8 @@ let g:airline#extensions#tabline#fnamecollapse=0
 let g:WebDevIconsUnicodeGlyphDoubleWidth = 1
 let g:WebDevIconsUnicodeDecorateFolderNodes = 1
 
-" let g:airline_extensions= ['branch', 'coc', 'denite', 'vimtex', 'undotree', 'fugitiveline', 'hunks']
+" let g:airline_extensions = ['quickfix', 'netrw', 'term', 'ctrlp', 'hunks', 'branch', 'fugitiveline', 'coc', 'whitespace', 'po', 'wordcount', 'tabline', 'tmuxline', 'keymap', 'vimtex'] 
+" let g:airline_extensions= ['quickfix', 'wordcount', 'vimtex', 'branch', 'tabline', 'coc', 'denite', 'undotree', 'fugitiveline', 'hunks']
 let g:airline_powerline_fonts=1
 " au User AirlineAfterInit let g:airline_section_x = airline#section#create(["readonly", "%{get(b:, 'coc_git_blame', ' ')}"])
 " let g:airline_section_b = '%{get(g:,"coc_git_status", "")}%{get(b:, "coc_git_status", "")}'
@@ -784,11 +814,11 @@ function! s:powersafe_mode(timer)
 			" execute ":Semshi enable"
 		endif
 
-		call coc#config('git', {
-					\ 'xaddGBlameToVirtualText': s:restricted ? v:false: v:true,
-					\ 'addGBlameToBufferVar': s:restricted ? v:false: v:true,
-					\ 'enableGutters': s:restricted ? v:false: v:true
-					\})
+"		call coc#config('git', {
+"					\ 'xaddGBlameToVirtualText': s:restricted ? v:false: v:true,
+"					\ 'addGBlameToBufferVar': s:restricted ? v:false: v:true,
+"					\ 'enableGutters': s:restricted ? v:false: v:true
+"					\})
     endif
 endfunction
 
@@ -846,7 +876,6 @@ let g:ctrlp_user_command=['.git', 'cd %s && git ls-files . -co --exclude-standar
 let g:ctrlp_root_markers=['.ccls', 'venv', 'Makefile', 'manage.py', '.root', '.git', 'package.json', 'go.mod', 'Cargo.toml']
 " let g:ctrlp_working_path_mode='rc'
 let g:ctrlp_match_func={'match': 'pymatcher#PyMatch'}
-
 "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 "                CtrlSF
 "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -903,9 +932,10 @@ autocmd FileType json syntax match Comment +\/\/.\+$+
 autocmd FileType jinja,tex,html,markdown setlocal wrap spell cc=0 nonu nornu
 autocmd FileType yate setlocal smartindent
 autocmd BufNewFile,BufRead *.tsx set filetype=typescript.tsx
+autocmd BufNewFile,BufRead *.sol set filetype=solidity
 autocmd BufNewFile,BufRead *.jsx set filetype=javascript.jsx
 autocmd BufNewFile,BufRead *.js.flow set filetype=javascript
 autocmd BufNewFile,BufRead *.jinja2 set syntax=jinja
 autocmd BufNewFile,BufRead *.java set syntax=java
-autocmd BufWritePre *.go :call CocAction('runCommand', 'editor.action.organizeImport')
-" autocmd BufWritePre *.py :call CocAction('runCommand', 'python.sortImports')
+autocmd BufWritePre *.go :call CocActionAsync('runCommand', 'editor.action.organizeImport')
+" autocmd BufWritePre *.py :call CocActionAsync('runCommand', 'python.sortImports')
