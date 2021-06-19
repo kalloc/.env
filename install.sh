@@ -70,6 +70,7 @@ mkdir -p \$HOME/.config/coc/extensions;
 mkdir -p \$HOME/.config/nvim;
 cp \$HOME/.env/authorized_keys \$HOME/.ssh/ && chmod 600 \$HOME/.ssh/authorized_keys
 ln -sf \$HOME/.env/.bashrc \$HOME/
+ln -sf \$HOME/.env/.gitconfig \$HOME/
 ln -sf \$HOME/.env/.bash_export \$HOME/
 ln -sf \$HOME/.env/.profile \$HOME/
 ln -sf \$HOME/.env/.screenrc \$HOME/

@@ -1,6 +1,7 @@
 {
   "dependencies": {
     "coc-conventional": ">=1.0.0",
+    "coc-deno": ">=3.6.1",
     "coc-diagnostic": ">=0.20.0",
     "coc-eslint": ">=1.4.5",
     "coc-explorer": ">=0.18.3",
