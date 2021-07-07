@@ -489,7 +489,7 @@ augroup vimrc-rust
 augroup END
 
 "" Python
-call coc#add_extension('coc-python')
+call coc#add_extension('coc-pyright')
 let g:coc_filetypes += ['python']
 
 augroup vimrc-language-python
@@ -937,5 +937,5 @@ autocmd BufNewFile,BufRead *.jsx set filetype=javascript.jsx
 autocmd BufNewFile,BufRead *.js.flow set filetype=javascript
 autocmd BufNewFile,BufRead *.jinja2 set syntax=jinja
 autocmd BufNewFile,BufRead *.java set syntax=java
-autocmd BufWritePre *.go :call CocActionAsync('runCommand', 'editor.action.organizeImport')
+" autocmd BufWritePre *.go :call CocActionAsync('runCommand', 'editor.action.organizeImport')
 " autocmd BufWritePre *.py :call CocActionAsync('runCommand', 'python.sortImports')
