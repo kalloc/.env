@@ -46,6 +46,8 @@
         "ma": "addFile",
         "mA": "addDirectory"
     },
+    "pyright.completion.snippetSupport": true,
+    "pyright.organizeimports.provider":"isort",
     "python.linting.enabled": true,
     "python.analysis.downloadChannel": "stable",
     "python.analysis.diagnosticEnabled": true,

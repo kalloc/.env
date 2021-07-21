@@ -155,6 +155,7 @@ else
 endif
 
 " Languages.
+Plug 'vyperlang/vim-vyper'
 Plug 'neovimhaskell/haskell-vim'
 Plug 'alx741/vim-hindent' " Optional
 Plug 'dbgx/lldb.nvim'
