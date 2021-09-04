@@ -155,5 +155,5 @@ if [ -f ~/.bash_aliases_local ]; then
 fi
 
 if [ -f ~/.bashrc_local ]; then
-    . ~/.bashhrc_local
+    . ~/.bashrc_local
 fi

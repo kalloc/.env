@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "coc-apollo": ">=0.4.7",
     "coc-conventional": ">=1.0.0",
     "coc-deno": ">=3.6.1",
     "coc-diagnostic": ">=0.20.0",

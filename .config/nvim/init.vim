@@ -163,6 +163,7 @@ Plug 'lervag/vimtex'
 Plug 'cespare/vim-toml'
 Plug 'pangloss/vim-javascript'
 Plug 'mxw/vim-jsx'
+Plug 'jparise/vim-graphql'
 " Plug 'peitalin/vim-jsx-typescript'
 Plug 'leafgarland/typescript-vim'
 Plug 'rust-lang/rust.vim'
@@ -938,5 +939,8 @@ autocmd BufNewFile,BufRead *.jsx set filetype=javascript.jsx
 autocmd BufNewFile,BufRead *.js.flow set filetype=javascript
 autocmd BufNewFile,BufRead *.jinja2 set syntax=jinja
 autocmd BufNewFile,BufRead *.java set syntax=java
+autocmd BufNewFile,BufRead *.prisma setfiletype graphql
+autocmd BufNewFile,BufRead *.graphql setfiletype graphql
+autocmd BufNewFile,BufRead *.graphqls setfiletype graphql
 " autocmd BufWritePre *.go :call CocActionAsync('runCommand', 'editor.action.organizeImport')
 " autocmd BufWritePre *.py :call CocActionAsync('runCommand', 'python.sortImports')

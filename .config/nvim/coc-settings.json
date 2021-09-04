@@ -76,6 +76,7 @@
     "importCost.javascriptExtensions": [
         "\\.jsx?$"
     ],
+    "go.goplsOptions": {"verboseOutput": true},
     "importCost.bundleSizeDecoration": "both",
     "importCost.showCalculatingDecoration": true,
     "importCost.debug": false,
