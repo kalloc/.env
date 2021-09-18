@@ -113,6 +113,11 @@ Plug 'numirias/semshi', {'do': ':UpdateRemotePlugins'}
 if g:os == "osx" 
     " Plug 'lyokha/vim-xkbswitch'
 endif
+
+if g:os == "linux" 
+vnoremap <leader>tc y<cr>:call system("tmux load-buffer -", @0)<cr>gv
+nnoremap <leader>tp :let @0 = system("tmux save-buffer -")<cr>"0p<cr>g;
+endif
 " 
 Plug 'arakashic/chromatica.nvim', {'for': ['c', 'cpp'], 'do': ':UpdateRemotePlugins'}
 " Plug 'ciaranm/detectindent'
