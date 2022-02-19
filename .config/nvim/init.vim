@@ -106,6 +106,7 @@ Plug 'morhetz/gruvbox'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'FelikZ/ctrlp-py-matcher'
 Plug 'machakann/vim-highlightedyank'
+Plug 'mjlbach/neovim-ui'
 " Plug 'edkolev/tmuxline.vim'
 
 " Text.
@@ -141,6 +142,8 @@ Plug 'airblade/vim-rooter'
 " Plug 'w0rp/ale'
 Plug 'Shougo/echodoc.vim'
 Plug 'editorconfig/editorconfig-vim'
+let g:EditorConfig_verbose = 1
+let g:EditorConfig_core_mode = 'external_command'
 Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
 Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'ryanoasis/vim-devicons'
@@ -159,10 +162,14 @@ else
     Plug 'roxma/vim-hug-neovim-rpc'
 endif
 
+
+Plug 'wakatime/vim-wakatime'
+
 " Languages.
+Plug 'pantharshit00/vim-prisma'
 Plug 'vyperlang/vim-vyper'
 Plug 'neovimhaskell/haskell-vim'
-Plug 'alx741/vim-hindent' " Optional
+" Plug 'alx741/vim-hindent' " Optional
 Plug 'dbgx/lldb.nvim'
 Plug 'lervag/vimtex'
 Plug 'cespare/vim-toml'
@@ -495,6 +502,10 @@ augroup vimrc-rust
   autocmd FileType rust setlocal matchpairs-=<:>
 augroup END
 
+"" Prisma 
+call coc#add_extension('coc-prisma')
+let g:coc_filetypes += ['prisma']
+
 "" Python
 call coc#add_extension('coc-pyright')
 let g:coc_filetypes += ['python']
@@ -588,6 +599,9 @@ autocmd CursorHold * silent call CocActionAsync('highlight')
 " Remap for rename current word
 nmap <leader>n <Plug>(coc-rename)
 
+
+" Open Outline
+nnoremap <leader>o :CocOutline<CR>
 " Remap for format selected region
 " xmap <leader>f  <Plug>(coc-format-selected)
 " nmap <leader>f  <Plug>(coc-format-selected)
@@ -601,8 +615,8 @@ augroup mygroup
 augroup end
 
 " Remap for do codeAction of selected region, ex: `<leader>aap` for current paragraph
-xmap <leader>a  <Plug>(coc-codeaction-selected)
-nmap <leader>a  <Plug>(coc-codeaction-selected)
+xmap <leader>a  <Plug>(coc-codeaction-selected)<CR>
+nmap <leader>a  <Plug>(coc-codeaction-selected)<CR>
 
 " Remap for do codeAction of current line
 nmap <leader>ac  <Plug>(coc-codeaction)
@@ -661,8 +675,8 @@ set noshowmode
 let g:airline_highlighting_cache = 1
 let g:airline_powerline_fonts = 1
 
-let g:airline_section_c="%{expand('%:~:.:s|/src/|/s/|:s|^\\~/projects/|λ/|')}"
-let g:airline#extensions#tabline#fnamemod=':~:s|^\~/projects/\(.\{-}\)/\(.\{-}\)\(/.*\)\=$|[\1] \2|'
+let g:airline_section_c="%{expand('%:~:.:s|/src/|/s/|:s|^\\~/[a-z]\+/|λ/|')}"
+let g:airline#extensions#tabline#fnamemod=':~:s|^\~/[a-z]\+/\(.\{-}\)/\(.\{-}\)\(/.*\)\=$|[\1] \2|'
 
 let g:airline#extensions#xkblayout#enabled=0
 let g:airline#extensions#tabline#enabled=1
@@ -944,7 +958,8 @@ autocmd BufNewFile,BufRead *.jsx set filetype=javascript.jsx
 autocmd BufNewFile,BufRead *.js.flow set filetype=javascript
 autocmd BufNewFile,BufRead *.jinja2 set syntax=jinja
 autocmd BufNewFile,BufRead *.java set syntax=java
-autocmd BufNewFile,BufRead *.prisma setfiletype graphql
+autocmd BufNewFile,BufRead *.prisma set syntax=prisma
+autocmd BufNewFile,BufRead *.prisma setfiletype prisma
 autocmd BufNewFile,BufRead *.graphql setfiletype graphql
 autocmd BufNewFile,BufRead *.graphqls setfiletype graphql
 " autocmd BufWritePre *.go :call CocActionAsync('runCommand', 'editor.action.organizeImport')

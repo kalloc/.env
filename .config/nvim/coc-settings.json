@@ -76,6 +76,9 @@
     "importCost.javascriptExtensions": [
         "\\.jsx?$"
     ],
+    "coc.preferences.formatOnSaveFiletypes": [
+        "prisma"
+    ],
     "go.goplsOptions": {"verboseOutput": true},
     "importCost.bundleSizeDecoration": "both",
     "importCost.showCalculatingDecoration": true,
@@ -84,6 +87,33 @@
     "eslint.autoFixOnSave": true,
     "tsserver.enableJavascript": true,
     "languageserver": {
+        "haskell": {
+            "command": "haskell-language-server-wrapper",
+            "args": [
+                "--lsp"
+            ],
+            "rootPatterns": [
+                "stack.yaml",
+                ".hie-bios",
+                "BUILD.bazel",
+                "hie.yaml",
+                "cabal.project",
+                "cabal.config",
+                "package.yaml"
+            ],
+            "filetypes": [
+                "hs",
+                "lhs",
+                "haskell",
+                "lhaskell"
+            ],
+            "initializationOptions": {
+                "languageServerHaskell": {
+                    "maxNumberOfProblems": 10,
+                    "completionSnippetsOn": true
+                }
+            }
+        },
         "ocaml": {
             "command": "ocaml-language-server",
             "args": ["--stdio"],
