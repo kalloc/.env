@@ -27,3 +27,20 @@ snippet ipdb "import ipdb" w
 import ipdb
 ipdb.set_trace()
 endsnippet
+
+snippet pdb "import pdb" w
+import pdb
+pdb.set_trace()
+endsnippet
+
+snippet pytest "pytest" b
+def test_${1}():
+    pass
+endsnippet
+
+snippet pyskip "pytest.skip" b
+@pytest.mark.skip('NotImplemented')
+def test_${1}():
+    pass
+endsnippet
+
