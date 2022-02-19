@@ -90,6 +90,13 @@ if [[ $(which pyenv) != "" ]];then
 fi
 PYTHON_EXEC=$(which python)
 
+# Java
+if [[ -e "$HOME/.jenv/bin" ]];then
+    export PATH="$HOME/.jenv/bin:$PATH"
+    eval "$(jenv init -)"
+fi
+
+
 # NVM
 if [[ -f ~/.nvm/nvm.sh ]]; then
     source $HOME/.nvm/nvm.sh
