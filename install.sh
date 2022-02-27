@@ -55,8 +55,8 @@ sudo -Hi -u y bash <<EOF
 echo install nix
 nix-env -i git neovim mosh exo ripgrep tmux \
     ccls jq httpie fd bat asciinema \
-    python3 python3-pip python3-pip-tools python3-setuptools python3-pynvim \
-    nodejs \
+    python3.10-pip python3.10-pip-tools python3.10-setuptools python3.10-pynvim \
+    nodejs lsd \
      -j8
 
 if [[ ! -e \$HOME/.env ]];then
