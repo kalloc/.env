@@ -86,12 +86,12 @@ sudo -Hi -u y bash <<EOF
 if [[ ! -r \$HOME/.nvm ]]; then 
 echo install nvm
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.34.0/install.sh | bash;
+fi
 export NVM_DIR="\$HOME/.nvm"
 [ -s "\$NVM_DIR/nvm.sh" ] && \. "\$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "\$NVM_DIR/bash_completion" ] && \. "\$NVM_DIR/bash_completion"
 cd && nvm install node
 nvm alias default node
-fi
 npm install -g typescript yarn
 EOF
 
