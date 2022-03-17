@@ -56,7 +56,7 @@ echo install nix
 nix-env -i git neovim mosh exo ripgrep tmux \
     ccls jq httpie fd bat asciinema \
     python3.10-pip python3.10-pip-tools python3.10-setuptools python3.10-pynvim \
-    nodejs lsd \
+    nodejs lsd eternal-terminal \
      -j8
 
 if [[ ! -e \$HOME/.env ]];then
