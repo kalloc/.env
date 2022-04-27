@@ -53,11 +53,12 @@ fi
 
 sudo -Hi -u y bash <<EOF
 echo install nix
-nix-env -i git neovim mosh exo ripgrep tmux \
+nix-env -i git mosh exo ripgrep tmux \
     ccls jq httpie fd bat asciinema \
-    python3.10-pip python3.10-pip-tools python3.10-setuptools python3.10-pynvim \
     nodejs lsd eternal-terminal \
      -j8
+
+nix-env -iA nixpkgs.neovim nixpkgs.pkgs.python3 nixpkgs.python3Packages.pynvim
 
 if [[ ! -e \$HOME/.env ]];then
 	git clone https://github.com/kalloc/.env \$HOME/.env
