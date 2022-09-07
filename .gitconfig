@@ -1,6 +1,6 @@
 [user]
-	name = Nikita Kuznetsov
-	email = me@daedalus.ru
+    name = Nikita Kuznetsov
+    email = me@daedalus.ru
 
 [alias]
     up = !(git add . && git stash && git pull --rebase >&2) | grep -v \"No local changes to save\" && git stash pop
@@ -8,14 +8,27 @@
     st = status
     co = checkout
 
-[color]
-	diff = auto
-	status = auto
-	branch = auto
+[interactive]
+    diffFilter = delta --color-only
+
+[add.interactive]
+    useBuiltin = false # required for git 2.37.0
+
+[delta]
+    navigate = true    # use n and N to move between diff sections
+    light = false      # set to true if you're in a terminal w/ a light background color (e.g. the default macOS terminal)
+
+[merge]
+    conflictstyle = diff3
+
+[diff]
+    colorMoved = default
+
 
 [core]
-	quotepath = false
-	editor = vim
+    pager = delta
+    quotepath = false
+     editor = vim
 
 [push]
 	default = matching
