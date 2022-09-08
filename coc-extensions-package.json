@@ -1,0 +1,12 @@
+{
+  "dependencies": {
+    "coc-eslint": ">=1.4.5",
+    "coc-go": ">=0.13.3",
+    "coc-java": ">=1.5.3",
+    "coc-phpls": ">=2.2.0",
+    "coc-python": ">=1.2.13",
+    "coc-rust-analyzer": ">=0.46.1",
+    "coc-tslint-plugin": ">=1.2.0",
+    "coc-tsserver": ">=1.8.1"
+  }
+}
