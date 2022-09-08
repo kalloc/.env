@@ -17,16 +17,32 @@
 [add.interactive]
     useBuiltin = false # required for git 2.37.0
 
+[delta "decorations"]
+    commit-decoration-style = bold yellow box ul
+    file-style = bold yellow ul
+    file-decoration-style = none
+    hunk-header-decoration-style = cyan box ul
+
+[delta "line-numbers"]
+    line-numbers-left-style = cyan
+    line-numbers-right-style = cyan
+    line-numbers-minus-style = 124
+    line-numbers-plus-style = 28
+
 [delta]
+    features = side-by-side line-numbers decorations
+    syntax-theme = gruvbox-dark
+    plus-style = syntax "#003800"
+    minus-style = syntax "#3f0001"
     navigate = true    # use n and N to move between diff sections
     light = false      # set to true if you're in a terminal w/ a light background color (e.g. the default macOS terminal)
+    side-by-side = true
 
 [merge]
     conflictstyle = diff3
 
 [diff]
     colorMoved = default
-
 
 [core]
     pager = delta
@@ -35,7 +51,6 @@
 
 [push]
     default = matching
-
 
 [filter "media"]
     clean = git-media-clean %f
@@ -55,3 +70,49 @@
     smudge = git-lfs smudge -- %f
     process = git-lfs filter-process
     required = true
+
+
+
+# COLORS
+# ------
+# Dracula Dark Theme
+[color]
+  ui = auto
+[color "branch"]
+  current = cyan bold reverse
+  local = white
+  plain =
+  remote = cyan
+[color "diff"]
+  commit =
+  func = cyan
+  plain =
+  whitespace = magenta reverse
+  meta = white
+  frag = cyan bold reverse
+  old = red
+  new = green
+[color "grep"]
+  context =
+  filename =
+  function =
+  linenumber = white
+  match =
+  selected =
+  separator =
+[color "interactive"]
+  error =
+  header =
+  help =
+  prompt =
+[color "status"]
+  added = green
+  changed = yellow
+  header =
+  localBranch =
+  nobranch =
+  remoteBranch = cyan bold
+  unmerged = magenta bold reverse
+  untracked = red
+  updated = green bold
+
