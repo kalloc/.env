@@ -2,6 +2,9 @@
     name = Nikita Kuznetsov
     email = me@daedalus.ru
 
+[include]
+    path = ~/.gitconfig_local
+
 [alias]
     up = !(git add . && git stash && git pull --rebase >&2) | grep -v \"No local changes to save\" && git stash pop
     ci = commit
