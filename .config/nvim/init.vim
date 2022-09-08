@@ -151,7 +151,6 @@ Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
 Plug 'vwxyutarooo/nerdtree-devicons-syntax'
 Plug 'will133/vim-dirdiff'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
-
 Plug 'jackguo380/vim-lsp-cxx-highlight'
 
 if has('nvim')
@@ -188,7 +187,7 @@ Plug 'mustache/vim-mustache-handlebars'
 Plug 'pearofducks/ansible-vim'
 Plug 'thesis/vim-solidity'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
-
+Plug 'andythigpen/nvim-coverage'
 call plug#end()
 
 "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -252,11 +251,26 @@ function! GotoJump()
     endif
   endif
 endfunction
-nmap <leader>j :call GotoJump()<CR>
+nmap <leader>j :call GotoJump()
+
+
 
 "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+"             Debug 
+"~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+" mnemonic 'di' = 'debug inspect' (pick your own, if you prefer!)
+
+" for normal mode - the word under the cursor
+nmap <Leader>di <Plug>VimspectorBalloonEval
+" for visual mode, the visually selected text
+xmap <Leader>di <Plug>VimspectorBalloonEval
+nmap <Leader>db <Plug>VimspectorBreakpoints
+let g:vimspector_install_gadgets = [ 'debugpy', 'vscode-cpptools', 'vscode-node', 'CodeLLDB' ]
+nmap <F5> <Plug>VimspectorContinue
+" let g:vimspector_base_dir=expand( '$HOME/.vim/vimspector-config' )
 "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 "              Spelling
+"~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 set nospell
 set spellfile=~/.vim/spell/shit.utf-8.add
@@ -551,25 +565,19 @@ function IsCocEnabled()
 endfunction
 
 
-" Use tab for trigger completion with characters ahead and navigate.
-" Use command ':verbose imap <tab>' to make sure tab is not mapped by other plugin.
-inoremap <silent><expr> <TAB>
-      \ pumvisible() ? "\<C-n>" :
-      \ <SID>check_back_space() ? "\<TAB>" :
-      \ coc#refresh()
-inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
-
 function! s:check_back_space() abort
-  let col = col('.') - 1
-  return !col || getline('.')[col - 1]  =~# '\s'
+    let col = col('.') - 1
+    return !col || getline('.')[col - 1]  =~ '\s'
 endfunction
+" Insert <tab> when previous text is space, refresh completion if not.
+inoremap <silent><expr> <TAB>
+    \ coc#pum#visible() ? coc#pum#next(1):
+    \ <SID>check_back_space() ? "\<Tab>" :
+    \ coc#refresh()
+inoremap <expr><S-TAB> coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"
 
-" Use <c-space> to trigger completion.
 inoremap <silent><expr> <c-space> coc#refresh()
-
-" Use <cr> to confirm completion, `<C-g>u` means break undo chain at surrent position.
-" Coc only does snippet and additional edit on confirm.
-inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+inoremap <expr> <cr> coc#pum#visible() ? coc#_select_confirm() : "\<CR>"
 
 " Use `[c` and `]c` to navigate diagnostics
 " nmap <silent> [c <Plug>(coc-diagnostic-prev)
@@ -578,6 +586,7 @@ inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
 
 " Remap keys for gotos
 nmap <silent> <leader>d <Plug>(coc-definition)
+nmap <silent> <leader>a <Plug>(coc-action)
 nmap <silent> <leader>y <Plug>(coc-type-definition)
 nmap <silent> <leader>i <Plug>(coc-implementation)
 nmap <silent> <leader>r <Plug>(coc-references)
@@ -646,7 +655,7 @@ let g:lightline = {
 
 " Using CocList
 " Show all diagnostics
-nnoremap <silent> <space>a  :<C-u>CocList diagnostics<cr>
+nnoremap <silent> <space>d  :<C-u>CocList diagnostics<cr>
 " Manage extensions
 " nnoremap <silent> <space>e  :<C-u>CocList extensions<cr>
 " Show commands
@@ -656,11 +665,11 @@ nnoremap <silent> <space>o  :<C-u>CocList outline<cr>
 " Search workspace symbols
 nnoremap <silent> <space>s  :<C-u>CocList -I symbols<cr>
 " Do default action for next item.
-" nnoremap <silent> <space>j  :<C-u>CocNext<CR>
+nnoremap <silent> <space>j  :<C-u>CocNext<CR>
 " Do default action for previous item.
-" nnoremap <silent> <space>k  :<C-u>CocPrev<CR>
+nnoremap <silent> <space>k  :<C-u>CocPrev<CR>
 " Resume latest coc list
-" nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
+nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
 
 "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 "               airline
