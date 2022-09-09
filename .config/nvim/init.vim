@@ -165,6 +165,7 @@ endif
 Plug 'wakatime/vim-wakatime'
 
 " Languages.
+Plug 'ziglang/zig.vim'
 Plug 'pantharshit00/vim-prisma'
 Plug 'vyperlang/vim-vyper'
 Plug 'neovimhaskell/haskell-vim'
@@ -969,6 +970,7 @@ autocmd BufNewFile,BufRead *.jinja2 set syntax=jinja
 autocmd BufNewFile,BufRead *.java set syntax=java
 autocmd BufNewFile,BufRead *.prisma set syntax=prisma
 autocmd BufNewFile,BufRead *.prisma setfiletype prisma
+autocmd BufNewFile,BufRead *.zig setfiletype zig
 autocmd BufNewFile,BufRead *.graphql setfiletype graphql
 autocmd BufNewFile,BufRead *.graphqls setfiletype graphql
 " autocmd BufWritePre *.go :call CocActionAsync('runCommand', 'editor.action.organizeImport')
