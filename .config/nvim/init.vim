@@ -165,6 +165,8 @@ endif
 Plug 'wakatime/vim-wakatime'
 
 " Languages.
+Plug 'petRUShka/vim-sage'
+Plug 'iden3/vim-circom-syntax'
 Plug 'ziglang/zig.vim'
 Plug 'pantharshit00/vim-prisma'
 Plug 'vyperlang/vim-vyper'

@@ -2,6 +2,7 @@
    "codeLens.enable":  true,
    "codeLens.position": "eol",
    "diagnostic.enable": true,
+   "browser.port": 18888,
    "diagnostic.messageTarget":"float",
    "diagnostic.virtualText": true,
    "diagnostic.refreshOnInsertMode": false,
@@ -79,7 +80,11 @@
    "coc.preferences.formatOnSaveFiletypes": [
        "prisma"
    ],
-   "go.goplsOptions": {"verboseOutput": true},
+   "go.goplsUseDaemon": true,
+   "go.checkForUpdates": "inform",
+   "go.goplsOptions": {
+       "verboseOutput": false
+   },
    "importCost.bundleSizeDecoration": "both",
    "importCost.showCalculatingDecoration": true,
    "eslint.autoFixOnSave": true,
