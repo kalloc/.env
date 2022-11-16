@@ -54,7 +54,7 @@ fi
 sudo -Hi -u y bash <<EOF
 echo install nix
 nix-env -i git mosh exo ripgrep tmux \
-    ccls jq httpie fd bat asciinema \
+    ccls jq jc httpie fd bat asciinema \
     nodejs lsd eternal-terminal \
      -j8
 
@@ -114,8 +114,9 @@ if [[ ! -r \$HOME/.gvm ]]; then
 echo install gvm
 bash < <(curl -s -S -L https://raw.githubusercontent.com/moovweb/gvm/master/binscripts/gvm-installer)
 . /home/y/.gvm/scripts/gvm
-gvm install go1.12.7
-gvm use go1.12.7 --default
+gvm install go1.18.1
+gvm use go1.18.1 --default
+go install github.com/wader/fq@master
 fi
 EOF
 
