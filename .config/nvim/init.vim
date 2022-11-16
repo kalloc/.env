@@ -166,6 +166,7 @@ Plug 'wakatime/vim-wakatime'
 
 " Languages.
 Plug 'petRUShka/vim-sage'
+Plug 'bohlender/vim-smt2'
 Plug 'iden3/vim-circom-syntax'
 Plug 'ziglang/zig.vim'
 Plug 'pantharshit00/vim-prisma'
