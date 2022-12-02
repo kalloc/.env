@@ -80,6 +80,7 @@
    "coc.preferences.formatOnSaveFiletypes": [
        "prisma"
    ],
+   "explorer.trash.command": "mv --backup=t %l ~/.trash/",
    "go.goplsUseDaemon": true,
    "go.checkForUpdates": "inform",
    "go.goplsOptions": {
