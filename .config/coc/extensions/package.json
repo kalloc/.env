@@ -36,7 +36,6 @@
     "coc-yaml": ">=1.9.0",
     "coc-zls": ">=0.0.4",
     "coc-dotenv": ">=1.0.0",
-    "coc-discord": ">=0.1.0",
     "coc-dlang": ">=1.1.3",
     "coc-clangd": ">=0.27.0",
     "coc-elixir": ">=0.7.0"
