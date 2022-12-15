@@ -162,6 +162,9 @@ else
 endif
 
 
+Plug 'kalloc/vim_codex'
+Plug 'ShoofLLC/vim-openai'
+
 Plug 'wakatime/vim-wakatime'
 
 " Languages.
@@ -357,6 +360,14 @@ endif
 
 " Resize the split panes to become equal when the host window is resized.
 autocmd VimResized * wincmd =
+
+
+"~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+"         Codex
+"~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+"
+nnoremap  <C-x> :CreateCompletion<CR>
+inoremap  <C-x> <Esc>li<C-g>u<Esc>l:CreateCompletion<CR>
 
 "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 "         Move up/down lines

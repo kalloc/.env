@@ -1,190 +1,206 @@
 {
-   "codeLens.enable":  true,
-   "codeLens.position": "eol",
-   "diagnostic.enable": true,
-   "browser.port": 18888,
-   "diagnostic.messageTarget":"float",
-   "diagnostic.virtualText": true,
-   "diagnostic.refreshOnInsertMode": false,
-   "diagnostic.virtualTextPrefix": "‣ ",
-   "diagnostic.displayByAle": false,
-   "diagnostic.checkCurrentLine": true,
-   "diagnostic.errorSign": "✖",
-   "diagnostic.warningSign": "⚠",
-   "diagnostic.infoSign": "ℹ",
-   "diagnostic.hintSign": "ℹ",
-   "refactor.afterContext": 2,
-   "refactor.beforeContext": 2,
-   "suggest.autoTrigger": "always",
-   "suggest.acceptSuggestionOnCommitCharacter": true,
-   "suggest.maxCompleteItemCount": 100,
-   "suggest.localityBonus": true,
-   //"signature.enable": true,
-   //"signature.target": "float",
-   "rust-analyzer.lens.enable": true,
-   // "rust-analyzer.disableProgressNotifications": true,
-   "rust-analyzer.procMacro.enable": true,
-   "coc.preferences.rootPatterns": [
-       "package.json",
-       ".vim",
-       ".git",
-       ".env",
-       ".hg",
-       ".root",
-       ".projections.json"
-   ],
-   "explorer.width": 45,
-   "explorer.file.child.template": "[git | 2] [selection | clip | 1] [indent][icon | 1] [diagnosticError & 1][filename omitCenter 1][modified][readonly] [linkIcon & 1][link growRight 1 omitCenter 5]",
-   "explorer.file.showHiddenFiles": true,
-   "explorer.icon.enableNerdfont": true,
-   "explorer.previewAction.onHover": false,
-   "explorer.file.hiddenRules": {
-       "extensions": [
-           "o",
-           "a",
-           "obj",
-           "pyc"
-       ],
-       "filenames": ["node_modules", ".git"],
-       "patternMatches": [
-           "^\\.git$",
-           "^\\."
-       ]
-   },
-   "explorer.buffer.showHiddenBuffers": false,
-   "pyright.completion.snippetSupport": true,
-   "pyright.organizeimports.provider":"isort",
-   "python.linting.enabled": true,
-   "python.linting.pylintEnabled": true,
-   "python.linting.mypyEnabled": true,
-   "python.linting.pylintArgs": [
-       "--disable=W1401,C0111",
-       "-E"
-   ],
-   "python.linting.flake8Enabled": true,
-   "python.linting.flake8Args": [
-       "--append-config='select=B,E,F,W,I,C'",
-       "--max-line-length=99"
-   ],
-   "python.formatting.provider": "yapf",
-   "python.formatting.yapfArgs": [
-       "--style='{based_on_style: pep8, COLUMN_LIMIT: 100}'"
-   ],
-   "python.sortImports.path": "isort",
-   "importCost.typescriptExtensions": [
-       "\\.tsx?$"
-   ],
-   "importCost.javascriptExtensions": [
-       "\\.jsx?$"
-   ],
-   "coc.preferences.formatOnSaveFiletypes": [
-       "prisma"
-   ],
-   "explorer.trash.command": "mv --backup=t %l ~/.trash/",
-   "go.goplsUseDaemon": true,
-   "go.checkForUpdates": "inform",
-   "go.goplsOptions": {
-       "verboseOutput": false
-   },
-   "importCost.bundleSizeDecoration": "both",
-   "importCost.showCalculatingDecoration": true,
-   "eslint.autoFixOnSave": true,
-   "tsserver.enableJavascript": true,
-   "languageserver": {
-       "haskell": {
-           "command": "haskell-language-server-wrapper",
-           "args": [
-               "--lsp"
-           ],
-           "rootPatterns": [
-               "stack.yaml",
-               ".hie-bios",
-               "BUILD.bazel",
-               "hie.yaml",
-               "cabal.project",
-               "cabal.config",
-               "package.yaml"
-           ],
-           "filetypes": [
-               "hs",
-               "lhs",
-               "haskell",
-               "lhaskell"
-           ],
-           "initializationOptions": {
-               "languageServerHaskell": {
-                   "maxNumberOfProblems": 10,
-                   "completionSnippetsOn": true
-               }
-           }
-       },
-       "ocaml": {
-           "command": "ocaml-language-server",
-           "args": ["--stdio"],
-           "filetypes": ["ocaml", "reason"],
-           "rootPatterns": [".git/"]
-       },
-       "lua": {
-           "command": "lua-lsp",
-           "filetypes": ["lua"]
-       },
-       "dockerfile": {
-           "command": "docker-langserver",
-           "filetypes": ["Dockerfile"],
-           "args": ["--stdio"]
-       },
-       "elixir": {
-           "command": "elixir-ls",
-           "filetypes": ["elixir", "eelixir"]
-       },
-       "bingo": {
-           "command": "bingo",
-           "args": [
-               "--diagnostics-style=instant",
-               "--format-style=goimports"
-           ],
-           "rootPatterns": [
-               "go.mod",
-               ".git/"
-           ],
-           "filetypes": [
-               "ago"
-           ]
-       },
-       "pylance": {
-           "enable": false,
-           "filetypes": ["python"],
-           "module": "~/.vscode/extensions/ms-python.vscode-pylance-2021.1.3/",
-           "initializationOptions": {},
-           "settings": {
-               "python.analysis.typeCheckingMode": "basic",
-               "python.analysis.diagnosticMode": "openFilesOnly",
-               "python.analysis.autoSearchPaths": true,
-               "python.analysis.diagnosticSeverityOverrides": {}
-           }
-       },
-       "ccls": {
-           "command": "ccls",
-           "args": ["-v=1", "--log-file=/tmp/ccls.log"],
-           "filetypes": ["c", "cpp", "objc", "objcpp"],
-           "rootPatterns": [
-               ".ccls",
-               "compile_commands.json",
-               ".vim/",
-               ".git/",
-               ".hg/"
-           ],
-           "initializationOptions": {
-               "completion": {
-                   "detailedLabel": true
-               },
-               "highlight": { "lsRanges" : true },
-               "cacheDirectory": "/tmp/ccls"
-           }
-       }
-   },
-   "coc.preferences.extensionUpdateCheck": "never",
-   "java.errors.incompleteClasspath.severity": "ignore",
-   "java.trace.server": "verbose"
+    "codeLens.enable": true,
+    "codeLens.position": "eol",
+    "diagnostic.enable": true,
+    "diagnostic.messageTarget": "float",
+    "diagnostic.virtualText": true,
+    "diagnostic.refreshOnInsertMode": false,
+    "diagnostic.virtualTextPrefix": "‣ ",
+    "diagnostic.displayByAle": false,
+    "diagnostic.checkCurrentLine": true,
+    "diagnostic.errorSign": "✖",
+    "diagnostic.warningSign": "⚠",
+    "diagnostic.infoSign": "ℹ",
+    "diagnostic.hintSign": "ℹ",
+    "refactor.afterContext": 2,
+    "refactor.beforeContext": 2,
+    "suggest.autoTrigger": "always",
+    "suggest.acceptSuggestionOnCommitCharacter": true,
+    "suggest.maxCompleteItemCount": 100,
+    "suggest.localityBonus": true,
+    //"signature.enable": true,
+    //"signature.target": "float",
+    "rust-analyzer.lens.enable": true,
+    // "rust-analyzer.disableProgressNotifications": true,
+    "rust-analyzer.procMacro.enable": true,
+    "workspace.rootPatterns": [
+        "package.json",
+        ".vim",
+        ".git",
+        ".env",
+        ".hg",
+        ".root",
+        ".projections.json"
+    ],
+    "explorer.width": 45,
+    "explorer.file.child.template": "[git | 2] [selection | clip | 1] [indent][icon | 1] [diagnosticError & 1][filename omitCenter 1][modified][readonly] [linkIcon & 1][link growRight 1 omitCenter 5]",
+    "explorer.file.showHiddenFiles": true,
+    "explorer.icon.enableNerdfont": true,
+    "explorer.previewAction.onHover": false,
+    "explorer.file.hiddenRules": {
+        "extensions": [
+            "o",
+            "a",
+            "obj",
+            "pyc"
+        ],
+        "filenames": [
+            "node_modules",
+            ".git"
+        ],
+        "patternMatches": [
+            "^\\.git$",
+            "^\\."
+        ]
+    },
+    "explorer.buffer.showHiddenBuffers": false,
+    "pyright.completion.snippetSupport": true,
+    "pyright.organizeimports.provider": "isort",
+    "python.linting.enabled": true,
+    "python.linting.pylintEnabled": true,
+    "python.linting.pytypeEnabled": true,
+    "python.linting.mypyEnabled": true,
+    "python.linting.pylintArgs": [
+        "--disable=W1401,C0111",
+        "-E"
+    ],
+    "python.linting.flake8Enabled": true,
+    "python.linting.flake8Args": [
+        "--append-config='select=B,E,F,W,I,C'",
+        "--max-line-length=99"
+    ],
+    "python.formatting.provider": "yapf",
+    "python.formatting.yapfArgs": [
+        "--style='{based_on_style: pep8, COLUMN_LIMIT: 100}'"
+    ],
+    "python.sortImports.path": "isort",
+    "importCost.typescriptExtensions": [
+        "\\.tsx?$"
+    ],
+    "importCost.javascriptExtensions": [
+        "\\.jsx?$"
+    ],
+    "[prisma]": {
+        "coc.preferences.formatOnSave": true
+    },
+    "explorer.trash.command": "mv --backup=t %l ~/.trash/",
+    "go.goplsUseDaemon": true,
+    "go.checkForUpdates": "inform",
+    "go.goplsOptions": {
+        "verboseOutput": false
+    },
+    "importCost.bundleSizeDecoration": "both",
+    "importCost.showCalculatingDecoration": true,
+    "eslint.autoFixOnSave": true,
+    "languageserver": {
+        "haskell": {
+            "command": "haskell-language-server-wrapper",
+            "args": [
+                "--lsp"
+            ],
+            "rootPatterns": [
+                "stack.yaml",
+                ".hie-bios",
+                "BUILD.bazel",
+                "hie.yaml",
+                "cabal.project",
+                "cabal.config",
+                "package.yaml"
+            ],
+            "filetypes": [
+                "hs",
+                "lhs",
+                "haskell",
+                "lhaskell"
+            ],
+            "initializationOptions": {
+                "languageServerHaskell": {
+                    "maxNumberOfProblems": 10,
+                    "completionSnippetsOn": true
+                }
+            }
+        },
+        "ocaml": {
+            "command": "ocaml-language-server",
+            "args": [
+                "--stdio"
+            ],
+            "filetypes": [
+                "ocaml",
+                "reason"
+            ],
+            "rootPatterns": [
+                ".git/"
+            ]
+        },
+        "lua": {
+            "command": "lua-lsp",
+            "filetypes": [
+                "lua"
+            ]
+        },
+        "dockerfile": {
+            "command": "docker-langserver",
+            "filetypes": [
+                "Dockerfile"
+            ],
+            "args": [
+                "--stdio"
+            ]
+        },
+        "elixir": {
+            "command": "elixir-ls",
+            "filetypes": [
+                "elixir",
+                "eelixir"
+            ]
+        },
+        "bingo": {
+            "command": "bingo",
+            "args": [
+                "--diagnostics-style=instant",
+                "--format-style=goimports"
+            ],
+            "rootPatterns": [
+                "go.mod",
+                ".git/"
+            ],
+            "filetypes": [
+                "ago"
+            ]
+        },
+        // "ccls": {
+        //     "command": "ccls",
+        //     "args": [
+        //         "-v=1",
+        //         "--log-file=/tmp/ccls.log"
+        //     ],
+        //     "filetypes": [
+        //         "c",
+        //         "cpp",
+        //         "objc",
+        //         "objcpp"
+        //     ],
+        //     "rootPatterns": [
+        //         ".ccls",
+        //         "compile_commands.json",
+        //         ".vim/",
+        //         ".git/",
+        //         ".hg/"
+        //     ],
+        //     "initializationOptions": {
+        //         "completion": {
+        //             "detailedLabel": true
+        //         },
+        //         "highlight": {
+        //             "lsRanges": true
+        //         },
+        //         "cacheDirectory": "/tmp/ccls"
+        //     }
+        // }
+    },
+    "coc.preferences.extensionUpdateCheck": "never",
+    "java.errors.incompleteClasspath.severity": "ignore",
+    "java.trace.server": "verbose",
+    "clangd.path": "~/.config/coc/extensions/coc-clangd-data/install/15.0.6/clangd_15.0.6/bin/clangd"
 }
-
