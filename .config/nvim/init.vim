@@ -162,6 +162,11 @@ else
 endif
 
 
+
+Plug 'nvim-lua/plenary.nvim'
+Plug 'nvim-telescope/telescope.nvim', { 'tag': '0.1.0' }
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+
 Plug 'kalloc/vim_codex'
 Plug 'ShoofLLC/vim-openai'
 
@@ -238,7 +243,10 @@ set incsearch
 set hlsearch
 set ignorecase
 set smartcase
+set maxmempattern=10000
 
+"https://github.com/neovim/neovim/issues/17867"
+nnoremap <esc> <C-o>
 nnoremap <C-[> <C-o>
 nnoremap <C-]> <C-i>
 
@@ -427,6 +435,15 @@ let g:NERDTreeIndicatorMapCustom = {
 
 " nnoremap <silent> <leader>x :NERDTreeToggle %<CR>
 nnoremap <silent> <leader>x :CocCommand explorer<CR>
+
+"~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+"   telescope
+"~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+nnoremap <leader>ff <cmd>Telescope find_files<cr>
+nnoremap <leader>fg <cmd>Telescope live_grep<cr>
+nnoremap <leader>fb <cmd>Telescope buffers<cr>
+nnoremap <leader>fh <cmd>Telescope help_tags<cr>
 
 "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 "                FlyGrep
