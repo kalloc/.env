@@ -24,9 +24,9 @@
     // "rust-analyzer.disableProgressNotifications": true,
     "rust-analyzer.procMacro.enable": true,
     "workspace.rootPatterns": [
-        "package.json",
-        ".vim",
         ".git",
+        ".vim",
+        "package.json",
         ".env",
         ".hg",
         ".root",

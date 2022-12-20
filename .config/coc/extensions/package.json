@@ -1,13 +1,17 @@
 {
   "dependencies": {
     "@yaegassy/coc-tailwindcss3": ">=0.4.5",
+    "coc-clangd": ">=0.27.0",
     "coc-conventional": ">=1.0.0",
     "coc-css": ">=2.0.0",
     "coc-deno": ">=3.10.5",
-    "coc-diagnostic": ">=0.23.5",
-    "coc-eslint": ">=1.5.8",
+    "coc-diagnostic": ">=0.23.6",
+    "coc-dlang": ">=1.1.3",
+    "coc-dotenv": ">=1.0.0",
+    "coc-elixir": ">=0.7.0",
+    "coc-eslint": ">=1.6.0",
     "coc-explorer": ">=0.25.4",
-    "coc-flow": ">=0.1.3",
+    "coc-flow": ">=0.1.4",
     "coc-fzf-preview": ">=2.15.2",
     "coc-go": ">=1.3.0",
     "coc-grammarly": ">=0.0.2",
@@ -28,27 +32,18 @@
     "coc-sql": ">=0.11.0",
     "coc-sqlfluff": ">=0.10.7",
     "coc-swagger": ">=0.0.3",
+    "coc-tsdetect": ">=4.0.3",
     "coc-tslint-plugin": ">=1.2.0",
     "coc-tsserver": ">=2.1.0",
     "coc-vetur": ">=1.2.5",
     "coc-webpack": ">=1.5.0",
     "coc-xml": ">=1.14.1",
     "coc-yaml": ">=1.9.0",
-    "coc-zls": ">=0.0.4",
-    "coc-dotenv": ">=1.0.0",
-    "coc-dlang": ">=1.1.3",
-    "coc-clangd": ">=0.27.0",
-    "coc-elixir": ">=0.7.0",
     "coc-zig": ">=0.6.1",
-    "coc-tsdetect": ">=4.0.3",
-    "coc-solidity-antico": ">=0.6.9"
+    "coc-zls": ">=0.0.4"
   },
   "disabled": [
-    "coc-grammarly",
-    "coc-solidity"
-  ],
-  "locked": [
     "coc-grammarly"
   ],
-  "lastUpdate": 1671288588863
+  "locked": []
 }
