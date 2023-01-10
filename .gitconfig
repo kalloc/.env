@@ -10,6 +10,7 @@
     ci = commit
     st = status
     co = checkout
+	versions = tag --sort=v:refname
 
 [interactive]
     diffFilter = delta --color-only
