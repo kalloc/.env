@@ -114,6 +114,7 @@ Plug 'mjlbach/neovim-ui'
 Plug 'numirias/semshi', {'do': ':UpdateRemotePlugins'}
 if g:os == "osx" 
     " Plug 'lyokha/vim-xkbswitch'
+    Plug 'edluffy/hologram.nvim', {'branch': 'main'}
     let g:python3_host_prog = '/opt/homebrew/bin/python3.9'
 endif
 
