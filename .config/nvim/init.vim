@@ -56,6 +56,7 @@ set nobackup
 set nowritebackup
 
 set wildignore+=node_modules,.build,__pycache__,venv,.git,.hg,.svn,*.o,*.aux,*.png,*.jpg,*.pdf
+
 set nofoldenable
 syntax on
 
@@ -142,8 +143,9 @@ Plug 'airblade/vim-rooter'
 " Plug 'metakirby5/codi.vim'
 " Plug 'w0rp/ale'
 Plug 'Shougo/echodoc.vim'
+Plug 'brgmnn/vim-opencl'
 Plug 'editorconfig/editorconfig-vim'
-let g:EditorConfig_verbose = 1
+let g:EditorConfig_verbose = 0
 let g:EditorConfig_core_mode = 'external_command'
 Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
 Plug 'Xuyuanp/nerdtree-git-plugin'
@@ -272,6 +274,48 @@ endfunction
 nmap <leader>j :call GotoJump()
 
 
+"~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+"             Tree-sitter 
+"~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+lua <<EOF
+require'nvim-treesitter.configs'.setup {
+  ensure_installed = "all", -- one of "all", "maintained" (parsers with maintainers), or a list of languages
+  ignore_install = {  }, -- List of parsers to ignore installing
+  highlight = {
+    enable = true,              -- false will disable the whole extension
+    -- Setting this to true will run `:h syntax` and tree-sitter at the same time.
+    -- Set this to `true` if you depend on 'syntax' being enabled (like for indentation).
+    -- Using this option may slow down your editor, and you may see some duplicate highlights.
+    -- Instead of true it can also be a list of languages
+    additional_vim_regex_highlighting = false,
+  },
+}
+EOF
+
+lua <<EOF
+require'nvim-treesitter.configs'.setup {
+  incremental_selection = {
+    enable = true,
+    keymaps = {
+      init_selection = "gnn",
+      node_incremental = "grn",
+      scope_incremental = "grc",
+      node_decremental = "grm",
+    },
+  },
+}
+EOF
+
+lua <<EOF
+require'nvim-treesitter.configs'.setup {
+  indent = {
+    enable = true
+  }
+}
+EOF
+
+set foldmethod=expr
+set foldexpr=nvim_treesitter#foldexpr()
 
 "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 "             Debug 
@@ -1002,6 +1046,8 @@ autocmd BufNewFile,BufRead *.jsx set filetype=javascript.jsx
 autocmd BufNewFile,BufRead *.js.flow set filetype=javascript
 autocmd BufNewFile,BufRead *.jinja2 set syntax=jinja
 autocmd BufNewFile,BufRead *.java set syntax=java
+autocmd BufNewFile,BufRead *.cl set syntax=opencl
+autocmd BufNewFile,BufRead *.cl setfiletype opencl
 autocmd BufNewFile,BufRead *.prisma set syntax=prisma
 autocmd BufNewFile,BufRead *.prisma setfiletype prisma
 autocmd BufNewFile,BufRead *.zig setfiletype zig
