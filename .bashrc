@@ -113,7 +113,10 @@ fi
 [[ -f ~/.gvm/scripts/gvm ]] && source $HOME/.gvm/scripts/gvm
 
 # Rust
-export PATH="$HOME/.cargo/bin:$PATH"
+if [[ -f ~/.cargo/env ]];then
+    source "$HOME/.cargo/env"
+    export PATH="$HOME/.cargo/bin:$PATH"
+fi
 
 # OCaml
 if [[ -f $HOME/.opam/opam-init/init.sh ]];then 

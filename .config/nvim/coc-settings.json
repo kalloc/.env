@@ -22,7 +22,7 @@
     //"signature.target": "float",
     "rust-analyzer.lens.enable": true,
     // "rust-analyzer.disableProgressNotifications": true,
-    "rust-analyzer.procMacro.enable": true,
+    // "rust-analyzer.procMacro.enable": true,
     "workspace.rootPatterns": [
         ".git",
         ".vim",

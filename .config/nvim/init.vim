@@ -1,4 +1,4 @@
-"     __   _(_)_ __ ___  _ __ ___
+"      __   _(_)_ __ ___  _ __ ___
 "      \ \ / / | '_ ` _ \| '__/ __|
 "       \ V /| | | | | | | | | (__
 "      (_)_/ |_|_| |_| |_|_|  \___|
@@ -147,6 +147,9 @@ Plug 'Shougo/echodoc.vim'
 Plug 'brgmnn/vim-opencl'
 Plug 'editorconfig/editorconfig-vim'
 let g:EditorConfig_verbose = 0
+if g:os == "linux"
+    let g:EditorConfig_exec_path = '/usr/bin/editorconfig'
+endif
 let g:EditorConfig_core_mode = 'external_command'
 Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
 Plug 'Xuyuanp/nerdtree-git-plugin'
@@ -177,6 +180,9 @@ Plug 'ShoofLLC/vim-openai'
 Plug 'wakatime/vim-wakatime'
 
 " Languages.
+Plug 'https://github.com/grwlf/litrepl.vim' , { 'rtp': 'vim' }
+Plug 'julesdesmit/aleo.vim'
+Plug 'iden3/vim-circom-syntax'
 Plug 'petRUShka/vim-sage'
 Plug 'Louis-Amas/noir-vim-support'
 Plug 'terrastruct/d2-vim'
@@ -278,7 +284,42 @@ nmap <leader>j :call GotoJump()
 "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 "             Tree-sitter 
 "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
 lua <<EOF
+
+local parser_config = require "nvim-treesitter.parsers".get_parser_configs()
+parser_config.func = {
+  install_info = {
+    url = "https://github.com/akifoq/tree-sitter-func", -- local path or git repo
+    files = {"src/parser.c"},
+    -- optional entries:
+    branch = "master", -- default branch in case of git repo if different from master
+    generate_requires_npm = false, -- if stand-alone parser without npm dependencies
+    requires_generate_from_grammar = false, -- if folder contains pre-generated src/parser.c
+  },
+}
+
+local ft_to_parser = require"nvim-treesitter.parsers".filetype_to_parsername
+ft_to_parser.func = "func"
+
+require'nvim-treesitter.configs'.setup {
+  incremental_selection = {
+    enable = true,
+    keymaps = {
+      init_selection = "gnn",
+      node_incremental = "grn",
+      scope_incremental = "grc",
+      node_decremental = "grm",
+    },
+  },
+}
+
+require'nvim-treesitter.configs'.setup {
+  indent = {
+    enable = true
+  }
+}
+
 require'nvim-treesitter.configs'.setup {
   ensure_installed = "all", -- one of "all", "maintained" (parsers with maintainers), or a list of languages
   ignore_install = {  }, -- List of parsers to ignore installing
@@ -291,31 +332,11 @@ require'nvim-treesitter.configs'.setup {
     additional_vim_regex_highlighting = false,
   },
 }
+
+
 EOF
 
-lua <<EOF
-require'nvim-treesitter.configs'.setup {
-  incremental_selection = {
-    enable = true,
-    keymaps = {
-      init_selection = "gnn",
-      node_incremental = "grn",
-      scope_incremental = "grc",
-      node_decremental = "grm",
-    },
-  },
-}
-EOF
-
-lua <<EOF
-require'nvim-treesitter.configs'.setup {
-  indent = {
-    enable = true
-  }
-}
-EOF
-
-set foldmethod=expr
+" set foldmethod=expr
 set foldexpr=nvim_treesitter#foldexpr()
 
 "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -662,7 +683,7 @@ inoremap <expr> <cr> coc#pum#visible() ? coc#_select_confirm() : "\<CR>"
 " Use `[c` and `]c` to navigate diagnostics
 " nmap <silent> [c <Plug>(coc-diagnostic-prev)
 " nmap <silent> ]c <Plug>(coc-diagnostic-next)
-" nmap <silent> <leader>e <Plug>(coc-diagnostic)
+nmap <silent> <leader>e <Plug>(coc-diagnostic)
 
 " Remap keys for gotos
 nmap <silent> <leader>d <Plug>(coc-definition)
@@ -1046,11 +1067,15 @@ autocmd BufNewFile,BufRead *.sol set filetype=solidity
 autocmd BufNewFile,BufRead *.jsx set filetype=javascript.jsx
 autocmd BufNewFile,BufRead *.js.flow set filetype=javascript
 autocmd BufNewFile,BufRead *.jinja2 set syntax=jinja
-autocmd BufNewFile,BufRead *.java set syntax=java
-autocmd BufNewFile,BufRead *.cl set syntax=opencl
+autocmd BufNewFile,BufRead *.fc		setfiletype fc
+autocmd BufNewFile,BufRead *.func	setfiletype fc
 autocmd BufNewFile,BufRead *.cl setfiletype opencl
+autocmd BufNewFile,BufRead *.circom setfiletype circom
 autocmd BufNewFile,BufRead *.prisma set syntax=prisma
 autocmd BufNewFile,BufRead *.prisma setfiletype prisma
+" Work around https://github.com/fannheyward/coc-rust-analyzer/issues/1113
+autocmd FileType * setlocal foldmethod=expr
+autocmd FileType rust setlocal foldmethod=indent
 autocmd BufNewFile,BufRead *.zig setfiletype zig
 autocmd BufNewFile,BufRead *.graphql setfiletype graphql
 autocmd BufNewFile,BufRead *.graphqls setfiletype graphql

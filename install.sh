@@ -56,9 +56,11 @@ echo install nix
 nix-env -i git mosh exo ripgrep tmux \
     ccls jq jc httpie fd bat asciinema \
     nodejs lsd eternal-terminal \
+    buf miller \
+    delta \
      -j8
 
-nix-env -iA nixpkgs.neovim nixpkgs.pkgs.python3 nixpkgs.python3Packages.pynvim nixpkgs.delta
+nix-env -iA nixpkgs.neovim nixpkgs.pkgs.python3 nixpkgs.python3Packages.pynvim
 
 if [[ ! -e \$HOME/.env ]];then
 	git clone https://github.com/kalloc/.env \$HOME/.env
@@ -81,6 +83,7 @@ ln -sf \$HOME/.env/.config/nvim/init.vim \$HOME/.config/nvim/
 ln -sf \$HOME/.env/.tmux.conf \$HOME/
 ln -sf \$HOME/.env/.bashrc \$HOME/
 ln -sf \$HOME/.env/.bash_aliases \$HOME/
+
 EOF
 
 sudo -Hi -u y bash <<EOF
@@ -114,8 +117,8 @@ if [[ ! -r \$HOME/.gvm ]]; then
 echo install gvm
 bash < <(curl -s -S -L https://raw.githubusercontent.com/moovweb/gvm/master/binscripts/gvm-installer)
 . /home/y/.gvm/scripts/gvm
-gvm install go1.18.1
-gvm use go1.18.1 --default
+gvm install go1.19.5
+gvm use go1.19.5 --default
 go install github.com/wader/fq@master
 fi
 EOF
