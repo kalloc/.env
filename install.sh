@@ -30,7 +30,7 @@ fi
 install_pkg git-core mc bash-completion psmisc software-properties-common \
 	libffi-dev build-essential python-dev libncursesw5-dev libgdbm-dev libc6-dev \
 	zlib1g-dev libsqlite3-dev tk-dev libssl-dev openssl \
-	bubblewrap mercurial curl
+	bubblewrap mercurial curl rename
 
 echo '[i] nick enviroment installer'
 #add user
