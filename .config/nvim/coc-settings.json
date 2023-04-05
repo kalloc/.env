@@ -22,7 +22,11 @@
     //"signature.target": "float",
     "rust-analyzer.lens.enable": true,
     // "rust-analyzer.disableProgressNotifications": true,
-    // "rust-analyzer.procMacro.enable": true,
+    "rust-analyzer.procMacro.enable": true,
+    "rust-analyzer.diagnostics.disabled": [
+        "unresolved-proc-macro"
+    ],
+    "rust-analyzer.procMacro.attributes.enable": true,
     "workspace.rootPatterns": [
         ".git",
         ".vim",
@@ -93,6 +97,23 @@
     "importCost.showCalculatingDecoration": true,
     "eslint.autoFixOnSave": true,
     "languageserver": {
+        "graphql": {
+            "command": "graphql-lsp",
+            "args": [
+                "server",
+                "-m",
+                "stream"
+            ],
+            // customize filetypes to your needs
+            "filetypes": [
+                "typescript",
+                "typescriptreact",
+                "graphql"
+            ],
+            "settings": {
+                "graphql-config.load.legacy": true
+            }
+        },
         "haskell": {
             "command": "haskell-language-server-wrapper",
             "args": [

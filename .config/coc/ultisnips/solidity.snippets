@@ -166,34 +166,27 @@ snippet mpp "public mapping" b
 mapping ($1 => $2) public $3;
 endsnippet
 
+# abstract contracts
+snippet conta "Contract" b
+abstract contract $1 {
+    $2
+}
+endsnippet
 # Contracts/functions
 snippet cont "Contract" b
 contract $1 {
-    constuctor() public {
+    constuctor()
+		public
+	{
     }
 
     $2
 }
 endsnippet
 
-snippet conta "Contract with some standard features" b
-contract $1 {
-    function $1($2) {
-	$3
-    }
-
-    function remove() {
-	if(msg.sender == creator) {
-	    selfdestruct(creator);
-	}
-    }
-
-    function () { throw; }
-}
-endsnippet
-
 snippet fun "" b
-function $1($2) {
+function $1($2)
+{
     $3
 }
 endsnippet
@@ -206,8 +199,20 @@ $3($4)
 }
 endsnippet
 
+snippet funri "Function with returns" b
+function $1($2)
+	internal
+	returns ($3)
+{
+  $4
+}
+endsnippet
+
 snippet funr "Function with returns" b
-function $1($2) returns ($3){
+function $1($2)
+	public
+	returns ($3)
+{
   $4
 }
 endsnippet

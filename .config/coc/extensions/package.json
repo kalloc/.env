@@ -5,7 +5,7 @@
     "coc-conventional": ">=1.0.0",
     "coc-css": ">=2.0.0",
     "coc-deno": ">=3.10.5",
-    "coc-diagnostic": ">=0.23.6",
+    "coc-diagnostic": ">=0.23.9",
     "coc-dlang": ">=1.1.3",
     "coc-dotenv": ">=1.0.0",
     "coc-elixir": ">=0.7.0",
@@ -39,7 +39,9 @@
     "coc-prisma": ">=0.11.0",
     "coc-go": ">=1.3.0",
     "coc-sqlfluff": ">=0.10.10",
-    "coc-protobuf": ">=0.0.2"
+    "coc-protobuf": ">=0.0.2",
+    "coc-ltex": ">=13.1.0",
+    "coc-node_modules": ">=0.0.0-development"
   },
   "disabled": [
     "coc-grammarly"

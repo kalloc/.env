@@ -174,8 +174,9 @@ Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim', { 'tag': '0.1.0' }
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 
-Plug 'kalloc/vim_codex'
-Plug 'ShoofLLC/vim-openai'
+" Plug 'kalloc/vim_codex'
+Plug 'github/copilot.vim'
+" Plug 'ShoofLLC/vim-openai'
 
 Plug 'wakatime/vim-wakatime'
 
@@ -1078,6 +1079,7 @@ autocmd FileType * setlocal foldmethod=expr
 autocmd FileType rust setlocal foldmethod=indent
 autocmd BufNewFile,BufRead *.zig setfiletype zig
 autocmd BufNewFile,BufRead *.graphql setfiletype graphql
+" autocmd BufNewFile,BufRead *.prisma setfiletype graphql
 autocmd BufNewFile,BufRead *.graphqls setfiletype graphql
 " autocmd BufWritePre *.go :call CocActionAsync('runCommand', 'editor.action.organizeImport')
 " autocmd BufWritePre *.py :call CocActionAsync('runCommand', 'python.sortImports')
