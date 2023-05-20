@@ -175,7 +175,7 @@ Plug 'nvim-telescope/telescope.nvim', { 'tag': '0.1.0' }
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 
 " Plug 'kalloc/vim_codex'
-Plug 'github/copilot.vim'
+" Plug 'github/copilot.vim'
 " Plug 'ShoofLLC/vim-openai'
 
 Plug 'wakatime/vim-wakatime'
