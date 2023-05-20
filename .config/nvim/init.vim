@@ -176,8 +176,8 @@ Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 
 " Plug 'kalloc/vim_codex'
 " Plug 'github/copilot.vim'
+Plug 'Exafunction/codeium.vim'
 " Plug 'ShoofLLC/vim-openai'
-
 Plug 'wakatime/vim-wakatime'
 
 " Languages.
