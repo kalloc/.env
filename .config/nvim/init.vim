@@ -409,14 +409,28 @@ set splitbelow
 set splitright
 
 " Easy movement.
-nnoremap <C-j> <C-w>j
-nnoremap <C-k> <C-w>k
-nnoremap <C-l> <C-w>l
-nnoremap <C-h> <C-w>h
-nnoremap <C-DOWN> <C-w>j
-nnoremap <C-UP> <C-w>k
-nnoremap <C-RIGHT> <C-w>l
-nnoremap <C-LEFT> <C-w>h
+" nnoremap <C-j> <C-w>j
+" nnoremap <C-k> <C-w>k
+" nnoremap <C-l> <C-w>l
+" nnoremap <C-h> <C-w>h
+" nnoremap <C-DOWN> <C-w>j
+" nnoremap <C-UP> <C-w>k
+" nnoremap <C-RIGHT> <C-w>l
+" nnoremap <C-LEFT> <C-w>h
+nnoremap <C-w>DOWN <C-w>j
+nnoremap <C-w>UP <C-w>k
+nnoremap <C-w>RIGHT <C-w>l
+nnoremap <C-w>LEFT <C-w>h
+nnoremap <C-RIGHT> <ESC>$
+inoremap <C-RIGHT> <ESC>A
+nnoremap <C-LEFT> <ESC>^
+inoremap <C-LEFT> <ESC>I
+nnoremap <C-UP> <ESC><C-b>
+nnoremap <C-DOWN> <ESC><C-f>
+
+" ctrl backspace delete backward word
+inoremap <C-h> <C-o><DEL>
+
 
 if has('nvim')
     " Some terminal settings.
@@ -424,14 +438,14 @@ if has('nvim')
     autocmd TermOpen * setlocal nonumber norelativenumber
 
     tnoremap <ESC> <C-\><C-n>
-    tnoremap <C-j> <C-\><C-n><C-w>j
-    tnoremap <C-k> <C-\><C-n><C-w>k
-    tnoremap <C-l> <C-\><C-n><C-w>l
-    tnoremap <C-h> <C-\><C-n><C-w>h
-    tnoremap <C-DOWN> <C-\><C-n><C-w>j
-    tnoremap <C-UP> <C-\><C-n><C-w>k
-    tnoremap <C-RIGHT> <C-\><C-n><C-w>l
-    tnoremap <C-LEFT> <C-\><C-n><C-w>h
+    " tnoremap <C-j> <C-\><C-n><C-w>j
+    " tnoremap <C-k> <C-\><C-n><C-w>k
+    " tnoremap <C-l> <C-\><C-n><C-w>l
+    " tnoremap <C-h> <C-\><C-n><C-w>h
+    tnoremap <C-w>DOWN <C-\><C-n><C-w>j
+    tnoremap <C-w>UP <C-\><C-n><C-w>k
+    tnoremap <C-w>RIGHT <C-\><C-n><C-w>l
+    tnoremap <C-w>LEFT <C-\><C-n><C-w>h
 endif
 
 " Resize the split panes to become equal when the host window is resized.

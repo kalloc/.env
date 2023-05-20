@@ -60,7 +60,7 @@ nix-env -i git mosh exo ripgrep tmux \
     delta \
      -j8
 
-nix-env -iA nixpkgs.neovim nixpkgs.pkgs.python3 nixpkgs.python3Packages.pynvim
+nix-env -iA nixpkgs.neovim nixpkgs.pkgs.python3 nixpkgs.python3Packages.pynvim nixpkgs.niv
 
 if [[ ! -e \$HOME/.env ]];then
 	git clone https://github.com/kalloc/.env \$HOME/.env

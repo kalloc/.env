@@ -41,11 +41,12 @@
     "coc-sqlfluff": ">=0.10.10",
     "coc-protobuf": ">=0.0.2",
     "coc-ltex": ">=13.1.0",
-    "coc-node_modules": ">=0.0.0-development"
+    "coc-node_modules": ">=0.0.0-development",
+    "coc-toml": ">=1.2.5"
   },
   "disabled": [
     "coc-grammarly"
   ],
   "locked": [],
-  "lastUpdate": 1677091171323
+  "lastUpdate": 1682423789202
 }

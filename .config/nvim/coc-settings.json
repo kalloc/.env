@@ -57,6 +57,10 @@
             "^\\."
         ]
     },
+    "typescript.format.insertSpaceBeforeFunctionParenthesis": false,
+    "javascript.format.insertSpaceBeforeFunctionParenthesis": false,
+    "typescript.format.insertSpaceAfterFunctionKeywordForAnonymousFunctions": false,
+    "javascript.format.insertSpaceAfterFunctionKeywordForAnonymousFunctions": false,
     "explorer.buffer.showHiddenBuffers": false,
     "pyright.completion.snippetSupport": true,
     "pyright.organizeimports.provider": "isort",
