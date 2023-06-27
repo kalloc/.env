@@ -302,8 +302,7 @@ parser_config.func = {
   },
 }
 
-local ft_to_parser = require"nvim-treesitter.parsers".filetype_to_parsername
-ft_to_parser.func = "func"
+vim.treesitter.language.register('func', 'func')
 
 require'nvim-treesitter.configs'.setup {
   incremental_selection = {
