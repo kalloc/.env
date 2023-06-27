@@ -149,6 +149,8 @@ Plug 'editorconfig/editorconfig-vim'
 let g:EditorConfig_verbose = 0
 if g:os == "linux"
     let g:EditorConfig_exec_path = '/usr/bin/editorconfig'
+elif g:os == "osx"
+    let g:EditorConfig_exec_path = '/opt/homebrew/bin/editorconfig'
 endif
 let g:EditorConfig_core_mode = 'external_command'
 Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
