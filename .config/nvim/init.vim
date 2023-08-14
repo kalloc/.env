@@ -149,7 +149,7 @@ Plug 'editorconfig/editorconfig-vim'
 let g:EditorConfig_verbose = 0
 if g:os == "linux"
     let g:EditorConfig_exec_path = '/usr/bin/editorconfig'
-elif g:os == "osx"
+else
     let g:EditorConfig_exec_path = '/opt/homebrew/bin/editorconfig'
 endif
 let g:EditorConfig_core_mode = 'external_command'
@@ -304,8 +304,6 @@ parser_config.func = {
     },
 }
 
-vim.treesitter.language.register('func', 'func')
-
 require'nvim-treesitter.configs'.setup {
     incremental_selection = {
         enable = true,
@@ -328,9 +326,11 @@ require'nvim-treesitter.configs'.setup {
     ensure_installed = {
         "bash",
         "c",
+        "c_sharp",
         "css",
         "diff",
         "dockerfile",
+        "elm",
         "eex",
         "elixir",
         "erlang",
@@ -346,11 +346,15 @@ require'nvim-treesitter.configs'.setup {
         "htmldjango",
         "javascript",
         "json",
+        "jq",
+        "jsonnet",
         "lua",
         "make",
         "markdown",
         "markdown_inline",
         "ocaml",
+        "ocaml_interface",
+        "ocamllex",
         "prisma",
         "proto",
         "python",
@@ -361,8 +365,10 @@ require'nvim-treesitter.configs'.setup {
         "toml",
         "tsx",
         "typescript",
+        "func",
         "vim",
         "yaml",
+        "xml",
         "zig",
     }, -- one of "all", "maintained" (parsers with maintainers), or a list of languages
     ignore_install = {  }, -- List of parsers to ignore installing
