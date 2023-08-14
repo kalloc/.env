@@ -42,11 +42,14 @@
     "coc-protobuf": ">=0.0.2",
     "coc-ltex": ">=13.1.0",
     "coc-node_modules": ">=0.0.0-development",
-    "coc-toml": ">=1.2.5"
+    "coc-toml": ">=1.2.5",
+    "coc-git": ">=2.6.1",
+    "coc-calc": ">=3.1.0",
+    "coc-omnisharp": ">=0.0.28"
   },
   "disabled": [
     "coc-grammarly"
   ],
   "locked": [],
-  "lastUpdate": 1682423789202
+  "lastUpdate": 1687815355522
 }

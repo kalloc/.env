@@ -11,7 +11,7 @@ set nocompatible
 if system('uname -s') == "Darwin\n"
     "OSX
     let g:os="osx"
-	set clipboard=unnamed,unnamedplus
+    set clipboard=unnamed,unnamedplus
 else
     "Linux
     let g:os="linux"
@@ -179,12 +179,14 @@ Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 " Plug 'kalloc/vim_codex'
 " Plug 'github/copilot.vim'
 Plug 'Exafunction/codeium.vim'
+" Plug 'codota/tabnine-nvim', { 'do': './dl_binaries.sh' }
 " Plug 'ShoofLLC/vim-openai'
 Plug 'wakatime/vim-wakatime'
 
 " Languages.
 Plug 'https://github.com/grwlf/litrepl.vim' , { 'rtp': 'vim' }
 Plug 'julesdesmit/aleo.vim'
+Plug 'OmniSharp/omnisharp-vim'
 Plug 'iden3/vim-circom-syntax'
 Plug 'petRUShka/vim-sage'
 Plug 'Louis-Amas/noir-vim-support'
@@ -269,17 +271,17 @@ endif
 
 
 function! GotoJump()
-  jumps
-  let j = input("Please select your jump: ")
-  if j != ''
-    let pattern = '\v\c^\+'
-    if j =~ pattern
-      let j = substitute(j, pattern, '', 'g')
-      execute "normal " . j . "\<c-i>"
-    else
-      execute "normal " . j . "\<c-o>"
+    jumps
+    let j = input("Please select your jump: ")
+    if j != ''
+        let pattern = '\v\c^\+'
+        if j =~ pattern
+            let j = substitute(j, pattern, '', 'g')
+            execute "normal " . j . "\<c-i>"
+        else
+            execute "normal " . j . "\<c-o>"
+        endif
     endif
-  endif
 endfunction
 nmap <leader>j :call GotoJump()
 
@@ -292,47 +294,86 @@ lua <<EOF
 
 local parser_config = require "nvim-treesitter.parsers".get_parser_configs()
 parser_config.func = {
-  install_info = {
-    url = "https://github.com/akifoq/tree-sitter-func", -- local path or git repo
-    files = {"src/parser.c"},
-    -- optional entries:
-    branch = "master", -- default branch in case of git repo if different from master
-    generate_requires_npm = false, -- if stand-alone parser without npm dependencies
-    requires_generate_from_grammar = false, -- if folder contains pre-generated src/parser.c
-  },
+    install_info = {
+        url = "https://github.com/akifoq/tree-sitter-func", -- local path or git repo
+        files = {"src/parser.c"},
+        -- optional entries:
+        branch = "master", -- default branch in case of git repo if different from master
+        generate_requires_npm = false, -- if stand-alone parser without npm dependencies
+        requires_generate_from_grammar = false, -- if folder contains pre-generated src/parser.c
+    },
 }
 
 vim.treesitter.language.register('func', 'func')
 
 require'nvim-treesitter.configs'.setup {
-  incremental_selection = {
-    enable = true,
-    keymaps = {
-      init_selection = "gnn",
-      node_incremental = "grn",
-      scope_incremental = "grc",
-      node_decremental = "grm",
+    incremental_selection = {
+        enable = true,
+        keymaps = {
+            init_selection = "gnn",
+            node_incremental = "grn",
+            scope_incremental = "grc",
+            node_decremental = "grm",
+        },
     },
-  },
 }
 
 require'nvim-treesitter.configs'.setup {
-  indent = {
-    enable = true
-  }
+    indent = {
+        enable = true
+    }
 }
 
 require'nvim-treesitter.configs'.setup {
-  ensure_installed = "all", -- one of "all", "maintained" (parsers with maintainers), or a list of languages
-  ignore_install = {  }, -- List of parsers to ignore installing
-  highlight = {
-    enable = true,              -- false will disable the whole extension
-    -- Setting this to true will run `:h syntax` and tree-sitter at the same time.
-    -- Set this to `true` if you depend on 'syntax' being enabled (like for indentation).
-    -- Using this option may slow down your editor, and you may see some duplicate highlights.
-    -- Instead of true it can also be a list of languages
-    additional_vim_regex_highlighting = false,
-  },
+    ensure_installed = {
+        "bash",
+        "c",
+        "css",
+        "diff",
+        "dockerfile",
+        "eex",
+        "elixir",
+        "erlang",
+        "func",
+        "gitcommit",
+        "git_config",
+        "git_rebase",
+        "go",
+        "gomod",
+        "graphql",
+        "haskell",
+        "html",
+        "htmldjango",
+        "javascript",
+        "json",
+        "lua",
+        "make",
+        "markdown",
+        "markdown_inline",
+        "ocaml",
+        "prisma",
+        "proto",
+        "python",
+        "rst",
+        "rust",
+        "scss",
+        "solidity",
+        "toml",
+        "tsx",
+        "typescript",
+        "vim",
+        "yaml",
+        "zig",
+    }, -- one of "all", "maintained" (parsers with maintainers), or a list of languages
+    ignore_install = {  }, -- List of parsers to ignore installing
+    highlight = {
+        enable = true,              -- false will disable the whole extension
+        -- Setting this to true will run `:h syntax` and tree-sitter at the same time.
+        -- Set this to `true` if you depend on 'syntax' being enabled (like for indentation).
+        -- Using this option may slow down your editor, and you may see some duplicate highlights.
+        -- Instead of true it can also be a list of languages
+        additional_vim_regex_highlighting = false,
+    },
 }
 
 
@@ -370,9 +411,9 @@ set undofile
 set undodir=~/.config/nvim/undodir
 
 augroup remember_folds
-  autocmd!
-  au BufWinLeave ?* mkview 1
-  au BufWinEnter ?* silent! loadview 1
+    autocmd!
+    au BufWinLeave ?* mkview 1
+    au BufWinEnter ?* silent! loadview 1
 augroup END
 
 "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -454,6 +495,22 @@ autocmd VimResized * wincmd =
 
 
 "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+"         Tabnine
+"~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+" lua <<EOF
+" require('tabnine').setup({
+"   disable_auto_comment=true,
+"   accept_keymap="<Tab>",
+"   dismiss_keymap = "<C-]>",
+"   debounce_ms = 800,
+"   suggestion_color = {gui = "#808080", cterm = 244},
+"   exclude_filetypes = {"TelescopePrompt"},
+"   log_file_path = nil, -- absolute path to Tabnine log file
+" })
+" EOF
+
+
+"~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 "         Codex
 "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 "
@@ -509,12 +566,12 @@ let g:NERDTreeDirArrowExpandable = '▸'
 let g:NERDTreeDirArrowCollapsible = '▾'
 
 let g:NERDTreeIndicatorMapCustom = {
-  \ 'Modified'  : '±',
-  \ 'Untracked' : '✪',
-  \ 'Renamed'   : '➲',
-  \ 'Unmerged'  : '≈',
-  \ 'Deleted'   : '×',
-  \ }
+            \ 'Modified'  : '±',
+            \ 'Untracked' : '✪',
+            \ 'Renamed'   : '➲',
+            \ 'Unmerged'  : '≈',
+            \ 'Deleted'   : '×',
+            \ }
 
 " nnoremap <silent> <leader>x :NERDTreeToggle %<CR>
 nnoremap <silent> <leader>x :CocCommand explorer<CR>
@@ -582,8 +639,8 @@ nmap ; <Plug>(coc-smartf-repeat)
 nmap , <Plug>(coc-smartf-repeat-opposite)
 
 augroup Smartf
-	autocmd User SmartfEnter :hi Conceal ctermfg=220 guifg=#6638F0
-	autocmd User SmartfLeave :hi Conceal ctermfg=239 guifg=#504945
+    autocmd User SmartfEnter :hi Conceal ctermfg=220 guifg=#6638F0
+    autocmd User SmartfLeave :hi Conceal ctermfg=239 guifg=#504945
 augroup end<Plug>CocRefresh
 
 let g:coc_filetypes = []
@@ -630,7 +687,7 @@ autocmd FileType rust let b:coc_root_patterns = ['Cargo.toml', '.git', '.env']
 let g:rust_recommended_style = 0
 
 augroup vimrc-rust
-  autocmd FileType rust setlocal matchpairs-=<:>
+    autocmd FileType rust setlocal matchpairs-=<:>
 augroup END
 
 "" Prisma 
@@ -642,7 +699,7 @@ call coc#add_extension('coc-pyright')
 let g:coc_filetypes += ['python']
 
 augroup vimrc-language-python
-  autocmd!
+    autocmd!
 augroup END
 autocmd FileType python let b:coc_root_patterns = ['manage.py', 'venv', 'requirements.txt', '.git', '.env']
 let g:python_highlight_all = 1
@@ -656,9 +713,9 @@ autocmd FileType php let b:coc_root_patterns = ['.git', '.env', 'composer.json']
 call coc#add_extension('coc-tsserver',  'coc-tslint-plugin')
 let g:coc_filetypes += ['typescript.jsx', 'typescript']
 call coc#config('tslint-plugin', {
-			\ 'filetypes': ['typescript', 'typescript.tsx'],
-			\ 'autoFixOnSave': v:false,
-			\ })
+            \ 'filetypes': ['typescript', 'typescript.tsx'],
+            \ 'autoFixOnSave': v:false,
+            \ })
 
 ""JS
 call coc#add_extension('coc-eslint')
@@ -678,7 +735,7 @@ call coc#config('eslint', {
 
 
 function IsCocEnabled()
-  return index(g:coc_filetypes, &filetype) >= 0
+    return index(g:coc_filetypes, &filetype) >= 0
 endfunction
 
 
@@ -688,9 +745,9 @@ function! s:check_back_space() abort
 endfunction
 " Insert <tab> when previous text is space, refresh completion if not.
 inoremap <silent><expr> <TAB>
-    \ coc#pum#visible() ? coc#pum#next(1):
-    \ <SID>check_back_space() ? "\<Tab>" :
-    \ coc#refresh()
+            \ coc#pum#visible() ? coc#pum#next(1):
+            \ <SID>check_back_space() ? "\<Tab>" :
+            \ coc#refresh()
 inoremap <expr><S-TAB> coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"
 
 inoremap <silent><expr> <c-space> coc#refresh()
@@ -712,11 +769,11 @@ nmap <silent> <leader>r <Plug>(coc-references)
 nnoremap <silent> K :call <SID>show_documentation()<CR>
 
 function! s:show_documentation()
-  if (index(['vim','help'], &filetype) >= 0)
-    execute 'h '.expand('<cword>')
-  else
-    call CocActionAsync('doHover')
-  endif
+    if (index(['vim','help'], &filetype) >= 0)
+        execute 'h '.expand('<cword>')
+    else
+        call CocActionAsync('doHover')
+    endif
 endfunction
 
 " Highlight symbol under cursor on CursorHold
@@ -733,11 +790,11 @@ nnoremap <leader>o :CocOutline<CR>
 " nmap <leader>f  <Plug>(coc-format-selected)
 
 augroup mygroup
-  autocmd!
-  " Setup formatexpr specified filetype(s).
-  autocmd FileType typescript,json setl formatexpr=CocActionAsync('formatSelected')
-  " Update signature help on jump placeholder
-  autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
+    autocmd!
+    " Setup formatexpr specified filetype(s).
+    autocmd FileType typescript,json setl formatexpr=CocActionAsync('formatSelected')
+    " Update signature help on jump placeholder
+    autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
 augroup end
 
 " Remap for do codeAction of selected region, ex: `<leader>aap` for current paragraph
@@ -758,15 +815,15 @@ command! -nargs=? Fold :call     CocActionAsync('fold', <f-args>)
 
 " Add diagnostic info for https://github.com/itchyny/lightline.vim
 let g:lightline = {
-      \ 'colorscheme': 'wombat',
-      \ 'active': {
-      \   'left': [ [ 'mode', 'paste' ],
-      \             [ 'cocstatus', 'readonly', 'filename', 'modified' ] ]
-      \ },
-      \ 'component_function': {
-      \   'cocstatus': 'coc#status'
-      \ },
-      \ }
+            \ 'colorscheme': 'wombat',
+            \ 'active': {
+            \   'left': [ [ 'mode', 'paste' ],
+            \             [ 'cocstatus', 'readonly', 'filename', 'modified' ] ]
+            \ },
+            \ 'component_function': {
+            \   'cocstatus': 'coc#status'
+            \ },
+            \ }
 
 
 
@@ -818,6 +875,7 @@ let g:WebDevIconsUnicodeDecorateFolderNodes = 1
 " let g:airline_extensions = ['quickfix', 'netrw', 'term', 'ctrlp', 'hunks', 'branch', 'fugitiveline', 'coc', 'whitespace', 'po', 'wordcount', 'tabline', 'tmuxline', 'keymap', 'vimtex'] 
 " let g:airline_extensions= ['quickfix', 'wordcount', 'vimtex', 'branch', 'tabline', 'coc', 'denite', 'undotree', 'fugitiveline', 'hunks']
 let g:airline_powerline_fonts=1
+" let g:airline_section_y = '{…}%3{codeium#GetStatusString()}'
 " au User AirlineAfterInit let g:airline_section_x = airline#section#create(["readonly", "%{get(b:, 'coc_git_blame', ' ')}"])
 " let g:airline_section_b = '%{get(g:,"coc_git_status", "")}%{get(b:, "coc_git_status", "")}'
 "let g:airline_section_b = "%{get(g:,'coc_git_status','')}%{get(b:,'coc_git_status','')}%{get(b:,'coc_git_blame','')}%{coc#status()}"
@@ -953,13 +1011,13 @@ function! s:powersafe_mode(timer)
     if on_battery != s:restricted
         let s:restricted=on_battery
 
-		if s:restricted == 1
-			setl updatetime=4000
-			" execute ":Semshi disable"
-		else
-			setl updatetime=400
-			" execute ":Semshi enable"
-		endif
+        if s:restricted == 1
+            setl updatetime=4000
+            " execute ":Semshi disable"
+        else
+            setl updatetime=400
+            " execute ":Semshi enable"
+        endif
 
 "		call coc#config('git', {
 "					\ 'xaddGBlameToVirtualText': s:restricted ? v:false: v:true,

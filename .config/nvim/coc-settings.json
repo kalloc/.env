@@ -224,8 +224,8 @@
         //     }
         // }
     },
-    "coc.preferences.extensionUpdateCheck": "never",
     "java.errors.incompleteClasspath.severity": "ignore",
     "java.trace.server": "verbose",
-    "clangd.path": "~/.config/coc/extensions/coc-clangd-data/install/15.0.6/clangd_15.0.6/bin/clangd"
+    "clangd.path": "~/.config/coc/extensions/coc-clangd-data/install/15.0.6/clangd_15.0.6/bin/clangd",
+    "zig.zls.path": "~/.config/coc/extensions/coc-zls-data/zls_install/zls"
 }
